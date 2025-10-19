@@ -1,9 +1,9 @@
 {
   "name": "claude-code-workflows",
   "owner": {
-    "name": "Seth Hobson",
-    "email": "seth@major7apps.com",
-    "url": "https://github.com/wshobson"
+    "name": "Eddie Flores",
+    "email": "eddie@iloves.io",
+    "url": "https://github.com/onesmartguy"
   },
   "metadata": {
     "description": "Production-ready workflow orchestration with 64 focused plugins, 87 specialized agents, and 44 tools - optimized for granular installation and minimal token usage",
@@ -414,13 +414,13 @@
       "name": "llm-application-dev",
       "source": "./plugins/llm-application-dev",
       "description": "LLM application development, prompt engineering, and AI assistant optimization",
-      "version": "1.2.2",
+      "version": "1.2.3",
       "author": {
-        "name": "Seth Hobson",
-        "url": "https://github.com/wshobson"
+        "name": "Eddie Flores",
+        "url": "https://github.com/onesmartguy"
       },
-      "homepage": "https://github.com/wshobson/agents",
-      "repository": "https://github.com/wshobson/agents",
+      "homepage": "https://github.com/onesmartguy/agents",
+      "repository": "https://github.com/onesmartguy/agents",
       "license": "MIT",
       "keywords": [
         "llm",
@@ -454,13 +454,13 @@
       "name": "agent-orchestration",
       "source": "./plugins/agent-orchestration",
       "description": "Multi-agent system optimization, agent improvement workflows, and context management",
-      "version": "1.2.1",
+      "version": "1.2.2",
       "author": {
-        "name": "Seth Hobson",
-        "url": "https://github.com/wshobson"
+        "name": "Eddie Flores",
+        "url": "https://github.com/onesmartguy"
       },
-      "homepage": "https://github.com/wshobson/agents",
-      "repository": "https://github.com/wshobson/agents",
+      "homepage": "https://github.com/onesmartguy/agents",
+      "repository": "https://github.com/onesmartguy/agents",
       "license": "MIT",
       "keywords": [
         "multi-agent",
@@ -2382,13 +2382,13 @@
       "name": "comic-production",
       "source": "./plugins/comic-production",
       "description": "Comic episode production with story development, character consistency, ComfyUI generation, Remotion assembly, and MCP orchestration for AI-generated comics",
-      "version": "1.2.3",
+      "version": "1.2.4",
       "author": {
-        "name": "Seth Hobson",
-        "url": "https://github.com/wshobson"
+        "name": "Eddie Flores",
+        "url": "https://github.com/onesmartguy"
       },
-      "homepage": "https://github.com/wshobson/agents",
-      "repository": "https://github.com/wshobson/agents",
+      "homepage": "https://github.com/onesmartguy/agents",
+      "repository": "https://github.com/onesmartguy/agents",
       "license": "MIT",
       "keywords": [
         "comic",
