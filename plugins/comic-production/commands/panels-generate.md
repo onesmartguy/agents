@@ -42,7 +42,7 @@ Generate all comic panel segments using multi-provider image generation system w
 
 ```javascript
 // 1. Render panel with auto provider fallback
-await mcp__em_e_comics__render_panel({
+await mcp__comic_strip_studio__render_panel({
   episodeId: "episode_02",
   shotId: "S01",
   characters: ["em", "e"],
@@ -55,17 +55,17 @@ await mcp__em_e_comics__render_panel({
 })
 
 // 2. List available providers
-const providers = await mcp__em_e_comics__list_providers()
+const providers = await mcp__comic_strip_studio__list_providers()
 // Returns: gemini-2.5-flash ($0.002), replicate-consistent-character ($0.01),
 //          replicate-flux ($0.03), comfyui-local (free)
 
 // 3. Get provider details
-await mcp__em_e_comics__get_provider_info({
+await mcp__comic_strip_studio__get_provider_info({
   provider: "gemini"
 })
 
 // 4. Get style presets
-const styles = await mcp__em_e_comics__get_style_presets()
+const styles = await mcp__comic_strip_studio__get_style_presets()
 // Returns 11 presets: em-e-comics, comic-book-classic, manga-style,
 // graphic-novel, newspaper-strip, webcomic-modern, action-dynamic,
 // slice-of-life-calm, horror-dark, sci-fi-neon, fantasy-painterly

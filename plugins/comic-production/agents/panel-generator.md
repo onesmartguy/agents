@@ -622,7 +622,7 @@ def distribute_shots(shots, num_gpus=2):
 
 ```javascript
 // 1. Render panel with auto provider fallback
-await mcp__em_e_comics__render_panel({
+await mcp__comic_strip_studio__render_panel({
   episodeId: "pilot",
   shotId: "S01",
   characters: ["em", "e"],
@@ -636,7 +636,7 @@ await mcp__em_e_comics__render_panel({
 })
 
 // 2. List available providers and status
-const providers = await mcp__em_e_comics__list_providers()
+const providers = await mcp__comic_strip_studio__list_providers()
 // Returns: [
 //   { name: "gemini-2.5-flash", available: true, cost: "$0.002/image", speed: "4-6s" },
 //   { name: "replicate-consistent-character", available: true, cost: "$0.01/image" },
@@ -645,12 +645,12 @@ const providers = await mcp__em_e_comics__list_providers()
 // ]
 
 // 3. Get provider details
-await mcp__em_e_comics__get_provider_info({
+await mcp__comic_strip_studio__get_provider_info({
   provider: "gemini"
 })
 
 // 4. Get available style presets
-const styles = await mcp__em_e_comics__get_style_presets()
+const styles = await mcp__comic_strip_studio__get_style_presets()
 // Returns 11 presets: em-e-comics (default), comic-book-classic, manga-style,
 // graphic-novel, newspaper-strip, webcomic-modern, action-dynamic,
 // slice-of-life-calm, horror-dark, sci-fi-neon, fantasy-painterly

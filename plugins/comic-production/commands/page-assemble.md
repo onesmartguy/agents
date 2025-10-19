@@ -46,7 +46,7 @@ Assemble generated segments into print-ready comic pages (6.875" x 10.5" @ 300 D
 
 ```javascript
 // Assemble print pages
-await mcp__em_e_comics__assemble_page({
+await mcp__comic_strip_studio__assemble_page({
   episodeId: "episode_02",
   pageNumber: 1,
   layout: "standard",  // or "action", "conversation"

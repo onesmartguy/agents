@@ -37,7 +37,7 @@ Convert beat sheet and script into detailed shotlist with camera angles, timing,
 
 ```javascript
 // 1. Create beat sheet from premise
-await mcp__em_e_comics__create_beat_sheet({
+await mcp__comic_strip_studio__create_beat_sheet({
   episodeId: "episode_02",
   premise: "E teaches Em about debugging after her code mysteriously breaks",
   targetDuration: 300,  // 5 minutes
@@ -46,7 +46,7 @@ await mcp__em_e_comics__create_beat_sheet({
 })
 
 // 2. Draft script from beat sheet
-await mcp__em_e_comics__draft_script({
+await mcp__comic_strip_studio__draft_script({
   episodeId: "episode_02",
   beatSheetPath: "episodes/episode_02/content/beat_sheet.md",
   characterVoices: {
@@ -56,7 +56,7 @@ await mcp__em_e_comics__draft_script({
 })
 
 // 3. Build shotlist from script
-await mcp__em_e_comics__build_shotlist({
+await mcp__comic_strip_studio__build_shotlist({
   episodeId: "episode_02",
   scriptPath: "episodes/episode_02/content/script.md",
   targetFormat: "both",  // "vertical-video", "print", or "both"
@@ -64,12 +64,12 @@ await mcp__em_e_comics__build_shotlist({
 })
 
 // 4. Validate story structure
-await mcp__em_e_comics__validate_story({
+await mcp__comic_strip_studio__validate_story({
   episodeId: "episode_02"
 })
 
 // 5. Export for review
-await mcp__em_e_comics__export_story({
+await mcp__comic_strip_studio__export_story({
   episodeId: "episode_02",
   format: "pdf",
   includeNotes: true

@@ -535,7 +535,7 @@ const panelSpec = {
 
 ```javascript
 // 1. Create character from photo analysis
-await mcp__em_e_comics__create_character_from_photo({
+await mcp__comic_strip_studio__create_character_from_photo({
   characterName: "em",
   photoPath: [
     "photos/em_front.jpg",
@@ -547,7 +547,7 @@ await mcp__em_e_comics__create_character_from_photo({
 })
 
 // 2. Add pose variations
-await mcp__em_e_comics__add_character_pose({
+await mcp__comic_strip_studio__add_character_pose({
   characterName: "em",
   poseName: "confident",
   poseDescription: "Hands on hips, standing tall, slight smile",
@@ -555,7 +555,7 @@ await mcp__em_e_comics__add_character_pose({
 })
 
 // 3. Add expressions
-await mcp__em_e_comics__add_character_expression({
+await mcp__comic_strip_studio__add_character_expression({
   characterName: "em",
   expressionName: "frustrated",
   expressionDescription: "Furrowed brow, slight frown, eyes looking up",
@@ -563,7 +563,7 @@ await mcp__em_e_comics__add_character_expression({
 })
 
 // 4. Add character props
-await mcp__em_e_comics__add_character_prop({
+await mcp__comic_strip_studio__add_character_prop({
   characterName: "em",
   propName: "laptop",
   propDescription: "Modern silver laptop with coding stickers",
@@ -572,12 +572,12 @@ await mcp__em_e_comics__add_character_prop({
 })
 
 // 5. Generate comprehensive documentation
-await mcp__em_e_comics__generate_character_overview({
+await mcp__comic_strip_studio__generate_character_overview({
   characterName: "em"
 })
 
 // 6. List all characters
-const characters = await mcp__em_e_comics__list_characters()
+const characters = await mcp__comic_strip_studio__list_characters()
 ```
 
 ## Resources

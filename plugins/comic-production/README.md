@@ -687,13 +687,13 @@ Options:
 
 ## MCP Tools Complete Reference
 
-All 28 actual tools from the mcp-em-e-comics server, organized by category.
+All 28 actual tools from the mcp-comic-strip-studio server, organized by category.
 
 ### Story Development Tools (5)
 
 **create_beat_sheet**
 ```javascript
-await mcp__em_e_comics__create_beat_sheet({
+await mcp__comic_strip_studio__create_beat_sheet({
   episodeId: string,
   premise: string,
   targetDuration: number,  // seconds
@@ -705,7 +705,7 @@ Generates structured 3-act beat sheet from premise with 10 beats.
 
 **draft_script**
 ```javascript
-await mcp__em_e_comics__draft_script({
+await mcp__comic_strip_studio__draft_script({
   episodeId: string,
   beatSheetPath: string,
   characterVoices: object  // { "em": "curious, enthusiastic", "e": "patient, technical" }
@@ -715,7 +715,7 @@ Creates script with character-appropriate dialogue from beat sheet.
 
 **build_shotlist**
 ```javascript
-await mcp__em_e_comics__build_shotlist({
+await mcp__comic_strip_studio__build_shotlist({
   episodeId: string,
   scriptPath: string,
   targetFormat: "vertical-video" | "print" | "both",
@@ -726,7 +726,7 @@ Builds shot-by-shot breakdown with camera angles and compositions.
 
 **validate_story**
 ```javascript
-await mcp__em_e_comics__validate_story({
+await mcp__comic_strip_studio__validate_story({
   episodeId: string
 })
 ```
@@ -734,7 +734,7 @@ Validates story structure, pacing, and character arcs.
 
 **export_story**
 ```javascript
-await mcp__em_e_comics__export_story({
+await mcp__comic_strip_studio__export_story({
   episodeId: string,
   format: "pdf" | "docx" | "markdown",
   includeNotes: boolean
@@ -746,7 +746,7 @@ Exports story content for review or distribution.
 
 **create_character_from_photo**
 ```javascript
-await mcp__em_e_comics__create_character_from_photo({
+await mcp__comic_strip_studio__create_character_from_photo({
   characterName: string,
   photoPath: string[],  // Multiple angles recommended
   analysisPrompt: string,  // Focus areas for AI vision
@@ -757,13 +757,13 @@ Analyzes photos using AI vision to extract appearance details automatically. Thi
 
 **list_characters**
 ```javascript
-const characters = await mcp__em_e_comics__list_characters()
+const characters = await mcp__comic_strip_studio__list_characters()
 ```
 Returns list of all created characters with their metadata.
 
 **add_character_pose**
 ```javascript
-await mcp__em_e_comics__add_character_pose({
+await mcp__comic_strip_studio__add_character_pose({
   characterName: string,
   poseName: string,
   poseDescription: string,
@@ -774,7 +774,7 @@ Adds pose variation to character (e.g., "confident", "thinking", "running").
 
 **add_character_expression**
 ```javascript
-await mcp__em_e_comics__add_character_expression({
+await mcp__comic_strip_studio__add_character_expression({
   characterName: string,
   expressionName: string,
   expressionDescription: string,
@@ -785,7 +785,7 @@ Adds facial expression (e.g., "happy", "frustrated", "surprised").
 
 **add_character_prop**
 ```javascript
-await mcp__em_e_comics__add_character_prop({
+await mcp__comic_strip_studio__add_character_prop({
   characterName: string,
   propName: string,
   propDescription: string,
@@ -797,7 +797,7 @@ Adds prop associated with character (e.g., laptop, skateboard, coffee mug).
 
 **add_prop_state**
 ```javascript
-await mcp__em_e_comics__add_prop_state({
+await mcp__comic_strip_studio__add_prop_state({
   characterName: string,
   propName: string,
   stateName: string,
@@ -808,7 +808,7 @@ Adds state variation to prop (e.g., laptop "open", "closed", "broken").
 
 **add_prop_animation**
 ```javascript
-await mcp__em_e_comics__add_prop_animation({
+await mcp__comic_strip_studio__add_prop_animation({
   characterName: string,
   propName: string,
   animationName: string,
@@ -820,7 +820,7 @@ Adds animation sequence to prop for video format.
 
 **generate_character_overview**
 ```javascript
-await mcp__em_e_comics__generate_character_overview({
+await mcp__comic_strip_studio__generate_character_overview({
   characterName: string
 })
 ```
@@ -830,7 +830,7 @@ Generates comprehensive character documentation (appearance, poses, expressions,
 
 **create_environment_from_photo**
 ```javascript
-await mcp__em_e_comics__create_environment_from_photo({
+await mcp__comic_strip_studio__create_environment_from_photo({
   environmentName: string,
   photoPath: string[],
   analysisPrompt: string,
@@ -841,13 +841,13 @@ Creates environment from photo analysis (AI vision extracts details).
 
 **list_environments**
 ```javascript
-const environments = await mcp__em_e_comics__list_environments()
+const environments = await mcp__comic_strip_studio__list_environments()
 ```
 Returns list of all created environments.
 
 **add_environment_setting**
 ```javascript
-await mcp__em_e_comics__add_environment_setting({
+await mcp__comic_strip_studio__add_environment_setting({
   environmentName: string,
   settingName: string,
   settingDescription: string
@@ -857,7 +857,7 @@ Adds environment variation (e.g., time of day, weather, lighting).
 
 **add_environment_prop**
 ```javascript
-await mcp__em_e_comics__add_environment_prop({
+await mcp__comic_strip_studio__add_environment_prop({
   environmentName: string,
   propName: string,
   propDescription: string,
@@ -869,7 +869,7 @@ Adds prop to environment (furniture, decorations, interactive objects).
 
 **generate_environment_overview**
 ```javascript
-await mcp__em_e_comics__generate_environment_overview({
+await mcp__comic_strip_studio__generate_environment_overview({
   environmentName: string
 })
 ```
@@ -879,7 +879,7 @@ Generates comprehensive environment documentation.
 
 **render_panel**
 ```javascript
-await mcp__em_e_comics__render_panel({
+await mcp__comic_strip_studio__render_panel({
   episodeId: string,
   shotId: string,
   // Structured approach (recommended):
@@ -903,7 +903,7 @@ Renders comic panel using multi-provider system with automatic fallback. Auto pr
 
 **list_providers**
 ```javascript
-const providers = await mcp__em_e_comics__list_providers()
+const providers = await mcp__comic_strip_studio__list_providers()
 // Returns: [
 //   { name: "gemini-2.5-flash", available: true, cost: "$0.002/image", speed: "4-6s" },
 //   { name: "replicate-consistent-character", available: true, cost: "$0.01/image" },
@@ -915,7 +915,7 @@ Lists available image generation providers with costs and status.
 
 **get_provider_info**
 ```javascript
-await mcp__em_e_comics__get_provider_info({
+await mcp__comic_strip_studio__get_provider_info({
   provider: "gemini" | "consistent" | "flux" | "local"
 })
 ```
@@ -925,7 +925,7 @@ Gets detailed information about specific provider.
 
 **render_segment**
 ```javascript
-await mcp__em_e_comics__render_segment({
+await mcp__comic_strip_studio__render_segment({
   episodeId: string,
   shotId: string,
   segmentType: "character-panel" | "speech-bubble" | "comic-effect" | "border",
@@ -936,7 +936,7 @@ Renders production segment (panels, bubbles, effects, borders).
 
 **render_speech_bubble**
 ```javascript
-await mcp__em_e_comics__render_speech_bubble({
+await mcp__comic_strip_studio__render_speech_bubble({
   episodeId: string,
   shotId: string,
   character: string,
@@ -950,7 +950,7 @@ Renders speech bubble with text and animations.
 
 **render_comic_effect**
 ```javascript
-await mcp__em_e_comics__render_comic_effect({
+await mcp__comic_strip_studio__render_comic_effect({
   episodeId: string,
   shotId: string,
   effectType: "impact" | "speed-lines" | "emphasis" | "action",
@@ -964,7 +964,7 @@ Renders comic visual effect (impact stars, motion lines, etc.).
 
 **compose_beats**
 ```javascript
-await mcp__em_e_comics__compose_beats({
+await mcp__comic_strip_studio__compose_beats({
   episodeId: string,
   outputPath: string,
   fps: number,
@@ -977,7 +977,7 @@ Composes rendered segments into video using Remotion. Creates 1080x1920 vertical
 
 **assemble_page**
 ```javascript
-await mcp__em_e_comics__assemble_page({
+await mcp__comic_strip_studio__assemble_page({
   episodeId: string,
   pageNumber: number,
   layout: "standard" | "action" | "conversation",
@@ -992,7 +992,7 @@ Assembles segments into print pages using Canvas. Default: 6.875" x 10.5" @ 300 
 
 **direct_story**
 ```javascript
-await mcp__em_e_comics__direct_story({
+await mcp__comic_strip_studio__direct_story({
   episodeId: string,
   premise: string,
   characters: string[],
@@ -1008,7 +1008,7 @@ High-level workflow automation. Orchestrates complete pipeline: beat sheet → s
 
 **get_style_presets**
 ```javascript
-const styles = await mcp__em_e_comics__get_style_presets()
+const styles = await mcp__comic_strip_studio__get_style_presets()
 // Returns 11 presets:
 // - em-e-comics (default, clean modern)
 // - comic-book-classic (traditional American)

@@ -124,7 +124,7 @@ Set up and configure the Em & E Comics MCP server with all 28 production tools.
 
 ```bash
 # Test story tools
-await mcp__em_e_comics__create_beat_sheet({
+await mcp__comic_strip_studio__create_beat_sheet({
   episodeId: "test",
   premise: "Test story",
   targetDuration: 60,
@@ -133,10 +133,10 @@ await mcp__em_e_comics__create_beat_sheet({
 })
 
 # Test character tools
-await mcp__em_e_comics__list_characters()
+await mcp__comic_strip_studio__list_characters()
 
 # Test image generation
-await mcp__em_e_comics__list_providers()
+await mcp__comic_strip_studio__list_providers()
 ```
 
 ## Troubleshooting

@@ -58,13 +58,13 @@ export WORKING_EPISODE=pilot
 const workingEpisode = process.env.WORKING_EPISODE || 'pilot'
 
 // All operations use this episode
-await mcp__em_e_comics__create_shotlist({
+await mcp__comic_strip_studio__create_shotlist({
   episode_slug: workingEpisode,
   // ...
 })
 
 // Or MCP server reads it automatically
-await mcp__em_e_comics__generate_panel({
+await mcp__comic_strip_studio__generate_panel({
   shot_id: "S01"  // Uses WORKING_EPISODE automatically
 })
 ```
@@ -80,7 +80,7 @@ export WORKING_EPISODE=episode_02
 
 ```javascript
 // MCP: Create episode
-await mcp__em_e_comics__create_episode({
+await mcp__comic_strip_studio__create_episode({
   title: "The Debugging Dilemma",
   logline: "E teaches Em about debugging using a broken science project",
   target_duration: 300,  // 5 minutes
@@ -122,7 +122,7 @@ await mcp__em_e_comics__create_episode({
 // → saves to episodes/episode_02/content/script.md
 
 // Update metadata
-await mcp__em_e_comics__update_episode({
+await mcp__comic_strip_studio__update_episode({
   status: "script_complete",
   characters: ["em", "e", "p"]
 })
@@ -132,7 +132,7 @@ await mcp__em_e_comics__update_episode({
 
 ```javascript
 // Storyboard artist creates shotlist
-await mcp__em_e_comics__create_shotlist({
+await mcp__comic_strip_studio__create_shotlist({
   beat_sheet_path: "episodes/episode_02/content/beat_sheet.md",
   output_format: "both"
 })
@@ -140,7 +140,7 @@ await mcp__em_e_comics__create_shotlist({
 // Saves to: episodes/episode_02/content/shotlist.json
 
 // Update metadata
-await mcp__em_e_comics__update_episode({
+await mcp__comic_strip_studio__update_episode({
   status: "shotlist_complete",
   shots: ["S01", "S02", "S03", ...],
   estimated_pages: 12
@@ -151,16 +151,16 @@ await mcp__em_e_comics__update_episode({
 
 ```javascript
 // Panel generator creates segments
-await mcp__em_e_comics__batch_generate_shots({
+await mcp__comic_strip_studio__batch_generate_shots({
   shot_ids: ["S01", "S02", "S03", "S04", "S05"]
 })
 
 // Progress tracking
-await mcp__em_e_comics__get_generation_progress()
+await mcp__comic_strip_studio__get_generation_progress()
 // Returns: { completed: 5, total: 20, percentage: 25 }
 
 // Update metadata
-await mcp__em_e_comics__update_episode({
+await mcp__comic_strip_studio__update_episode({
   status: "generation_in_progress",
   segments_completed: 5,
   segments_total: 20
@@ -171,7 +171,7 @@ await mcp__em_e_comics__update_episode({
 
 ```javascript
 // Comic assembler creates final outputs
-await mcp__em_e_comics__assemble_episode({
+await mcp__comic_strip_studio__assemble_episode({
   output_formats: ["vertical-video", "print-pdf"],
   generate_artifacts_website: true
 })
@@ -182,7 +182,7 @@ await mcp__em_e_comics__assemble_episode({
 // - episodes/episode_02/artifacts-website/
 
 // Update metadata
-await mcp__em_e_comics__update_episode({
+await mcp__comic_strip_studio__update_episode({
   status: "assembly_complete",
   output_files: {
     video: "output/episode.mp4",
@@ -200,20 +200,20 @@ open episodes/episode_02/artifacts-website/index.html
 
 # Make revisions if needed
 # Re-generate specific shots
-await mcp__em_e_comics__regenerate_shot({
+await mcp__comic_strip_studio__regenerate_shot({
   shot_id: "S03",
   reason: "Expression doesn't match intention"
 })
 
 # Re-assemble
-await mcp__em_e_comics__assemble_episode({})
+await mcp__comic_strip_studio__assemble_episode({})
 ```
 
 ### 7. Publication
 
 ```javascript
 // Mark as complete
-await mcp__em_e_comics__update_episode({
+await mcp__comic_strip_studio__update_episode({
   status: "published",
   published_at: new Date().toISOString(),
   distribution: {
@@ -252,7 +252,7 @@ const episodeAssets = {
 }
 
 // Save to metadata
-await mcp__em_e_comics__update_episode({
+await mcp__comic_strip_studio__update_episode({
   assets: episodeAssets
 })
 ```
@@ -291,7 +291,7 @@ async function produceEpisode(episodeSlug) {
 
   try {
     // 1. Create episode
-    await mcp__em_e_comics__create_episode({
+    await mcp__comic_strip_studio__create_episode({
       title: "Episode Title",
       logline: "Episode description",
       target_duration: 300,
@@ -304,7 +304,7 @@ async function produceEpisode(episodeSlug) {
 
     // 3. Create shotlist (storyboard-artist)
     console.log("→ Creating shotlist...")
-    await mcp__em_e_comics__create_shotlist({
+    await mcp__comic_strip_studio__create_shotlist({
       beat_sheet_path: `episodes/${episodeSlug}/content/beat_sheet.md`
     })
 
@@ -313,21 +313,21 @@ async function produceEpisode(episodeSlug) {
     const shotlist = loadShotlist(episodeSlug)
     const shotIds = shotlist.map(s => s.shot_id)
 
-    await mcp__em_e_comics__batch_generate_shots({
+    await mcp__comic_strip_studio__batch_generate_shots({
       shot_ids: shotIds
     })
 
     // Monitor progress
-    let progress = await mcp__em_e_comics__get_generation_progress()
+    let progress = await mcp__comic_strip_studio__get_generation_progress()
     while (progress.percentage < 100) {
       console.log(`  Progress: ${progress.percentage}%`)
       await sleep(5000)
-      progress = await mcp__em_e_comics__get_generation_progress()
+      progress = await mcp__comic_strip_studio__get_generation_progress()
     }
 
     // 5. Assemble episode (comic-assembler)
     console.log("→ Assembling episode...")
-    await mcp__em_e_comics__assemble_episode({
+    await mcp__comic_strip_studio__assemble_episode({
       output_formats: ["vertical-video", "print-pdf"],
       generate_artifacts_website: true
     })
@@ -337,7 +337,7 @@ async function produceEpisode(episodeSlug) {
     await generateArtifactWebsite(episodeSlug)
 
     // 7. Mark complete
-    await mcp__em_e_comics__update_episode({
+    await mcp__comic_strip_studio__update_episode({
       status: "ready_for_review"
     })
 
@@ -346,7 +346,7 @@ async function produceEpisode(episodeSlug) {
 
   } catch (error) {
     console.error(`✗ Production failed: ${error.message}`)
-    await mcp__em_e_comics__update_episode({
+    await mcp__comic_strip_studio__update_episode({
       status: "error",
       error_message: error.message
     })
@@ -367,7 +367,7 @@ async function batchGenerateParallel(shotIds, batchSize = 5) {
     // Generate batch in parallel
     await Promise.all(
       batches[i].map(shotId =>
-        mcp__em_e_comics__generate_panel({ shot_id: shotId })
+        mcp__comic_strip_studio__generate_panel({ shot_id: shotId })
       )
     )
   }
@@ -396,7 +396,7 @@ const EPISODE_STATES = {
 }
 
 // Get episode status
-const status = await mcp__em_e_comics__get_episode_status()
+const status = await mcp__comic_strip_studio__get_episode_status()
 console.log(status)
 // {
 //   slug: "episode_02",
@@ -410,7 +410,7 @@ console.log(status)
 
 ```javascript
 // Get production metrics
-const metrics = await mcp__em_e_comics__get_production_metrics()
+const metrics = await mcp__comic_strip_studio__get_production_metrics()
 
 console.log(metrics)
 // {
@@ -431,7 +431,7 @@ All 28 actual tools organized by category:
 
 ```javascript
 // Create beat sheet from premise
-await mcp__em_e_comics__create_beat_sheet({
+await mcp__comic_strip_studio__create_beat_sheet({
   episodeId: string,
   premise: string,
   targetDuration: number,  // seconds
@@ -440,14 +440,14 @@ await mcp__em_e_comics__create_beat_sheet({
 })
 
 // Draft script from beat sheet
-await mcp__em_e_comics__draft_script({
+await mcp__comic_strip_studio__draft_script({
   episodeId: string,
   beatSheetPath: string,
   characterVoices: object
 })
 
 // Build shotlist from script
-await mcp__em_e_comics__build_shotlist({
+await mcp__comic_strip_studio__build_shotlist({
   episodeId: string,
   scriptPath: string,
   targetFormat: "vertical-video" | "print" | "both",
@@ -455,12 +455,12 @@ await mcp__em_e_comics__build_shotlist({
 })
 
 // Validate story structure
-await mcp__em_e_comics__validate_story({
+await mcp__comic_strip_studio__validate_story({
   episodeId: string
 })
 
 // Export story content
-await mcp__em_e_comics__export_story({
+await mcp__comic_strip_studio__export_story({
   episodeId: string,
   format: "pdf" | "docx" | "markdown",
   includeNotes: boolean
@@ -471,7 +471,7 @@ await mcp__em_e_comics__export_story({
 
 ```javascript
 // Create character from photo analysis
-await mcp__em_e_comics__create_character_from_photo({
+await mcp__comic_strip_studio__create_character_from_photo({
   characterName: string,
   photoPath: string[],
   analysisPrompt: string,
@@ -479,10 +479,10 @@ await mcp__em_e_comics__create_character_from_photo({
 })
 
 // List all characters
-const characters = await mcp__em_e_comics__list_characters()
+const characters = await mcp__comic_strip_studio__list_characters()
 
 // Add pose variation
-await mcp__em_e_comics__add_character_pose({
+await mcp__comic_strip_studio__add_character_pose({
   characterName: string,
   poseName: string,
   poseDescription: string,
@@ -490,7 +490,7 @@ await mcp__em_e_comics__add_character_pose({
 })
 
 // Add expression variation
-await mcp__em_e_comics__add_character_expression({
+await mcp__comic_strip_studio__add_character_expression({
   characterName: string,
   expressionName: string,
   expressionDescription: string,
@@ -498,7 +498,7 @@ await mcp__em_e_comics__add_character_expression({
 })
 
 // Add character prop
-await mcp__em_e_comics__add_character_prop({
+await mcp__comic_strip_studio__add_character_prop({
   characterName: string,
   propName: string,
   propDescription: string,
@@ -507,7 +507,7 @@ await mcp__em_e_comics__add_character_prop({
 })
 
 // Add prop state
-await mcp__em_e_comics__add_prop_state({
+await mcp__comic_strip_studio__add_prop_state({
   characterName: string,
   propName: string,
   stateName: string,
@@ -515,7 +515,7 @@ await mcp__em_e_comics__add_prop_state({
 })
 
 // Add prop animation
-await mcp__em_e_comics__add_prop_animation({
+await mcp__comic_strip_studio__add_prop_animation({
   characterName: string,
   propName: string,
   animationName: string,
@@ -524,7 +524,7 @@ await mcp__em_e_comics__add_prop_animation({
 })
 
 // Generate character overview
-await mcp__em_e_comics__generate_character_overview({
+await mcp__comic_strip_studio__generate_character_overview({
   characterName: string
 })
 ```
@@ -533,7 +533,7 @@ await mcp__em_e_comics__generate_character_overview({
 
 ```javascript
 // Create environment from photo
-await mcp__em_e_comics__create_environment_from_photo({
+await mcp__comic_strip_studio__create_environment_from_photo({
   environmentName: string,
   photoPath: string[],
   analysisPrompt: string,
@@ -541,17 +541,17 @@ await mcp__em_e_comics__create_environment_from_photo({
 })
 
 // List all environments
-const environments = await mcp__em_e_comics__list_environments()
+const environments = await mcp__comic_strip_studio__list_environments()
 
 // Add environment setting
-await mcp__em_e_comics__add_environment_setting({
+await mcp__comic_strip_studio__add_environment_setting({
   environmentName: string,
   settingName: string,
   settingDescription: string
 })
 
 // Add environment prop
-await mcp__em_e_comics__add_environment_prop({
+await mcp__comic_strip_studio__add_environment_prop({
   environmentName: string,
   propName: string,
   propDescription: string,
@@ -560,7 +560,7 @@ await mcp__em_e_comics__add_environment_prop({
 })
 
 // Generate environment overview
-await mcp__em_e_comics__generate_environment_overview({
+await mcp__comic_strip_studio__generate_environment_overview({
   environmentName: string
 })
 ```
@@ -569,7 +569,7 @@ await mcp__em_e_comics__generate_environment_overview({
 
 ```javascript
 // Render panel with multi-provider fallback
-await mcp__em_e_comics__render_panel({
+await mcp__comic_strip_studio__render_panel({
   episodeId: string,
   shotId: string,
   characters?: string[],
@@ -587,10 +587,10 @@ await mcp__em_e_comics__render_panel({
 })
 
 // List available providers
-const providers = await mcp__em_e_comics__list_providers()
+const providers = await mcp__comic_strip_studio__list_providers()
 
 // Get provider information
-await mcp__em_e_comics__get_provider_info({
+await mcp__comic_strip_studio__get_provider_info({
   provider: string
 })
 ```
@@ -599,7 +599,7 @@ await mcp__em_e_comics__get_provider_info({
 
 ```javascript
 // Render segment
-await mcp__em_e_comics__render_segment({
+await mcp__comic_strip_studio__render_segment({
   episodeId: string,
   shotId: string,
   segmentType: "character-panel" | "speech-bubble" | "comic-effect" | "border",
@@ -607,7 +607,7 @@ await mcp__em_e_comics__render_segment({
 })
 
 // Render speech bubble
-await mcp__em_e_comics__render_speech_bubble({
+await mcp__comic_strip_studio__render_speech_bubble({
   episodeId: string,
   shotId: string,
   character: string,
@@ -618,7 +618,7 @@ await mcp__em_e_comics__render_speech_bubble({
 })
 
 // Render comic effect
-await mcp__em_e_comics__render_comic_effect({
+await mcp__comic_strip_studio__render_comic_effect({
   episodeId: string,
   shotId: string,
   effectType: "impact" | "speed-lines" | "emphasis" | "action",
@@ -631,7 +631,7 @@ await mcp__em_e_comics__render_comic_effect({
 
 ```javascript
 // Compose beats into video
-await mcp__em_e_comics__compose_beats({
+await mcp__comic_strip_studio__compose_beats({
   episodeId: string,
   outputPath: string,
   fps: number,
@@ -641,7 +641,7 @@ await mcp__em_e_comics__compose_beats({
 })
 
 // Assemble print pages
-await mcp__em_e_comics__assemble_page({
+await mcp__comic_strip_studio__assemble_page({
   episodeId: string,
   pageNumber: number,
   layout: "standard" | "action" | "conversation",
@@ -655,7 +655,7 @@ await mcp__em_e_comics__assemble_page({
 
 ```javascript
 // High-level workflow automation
-await mcp__em_e_comics__direct_story({
+await mcp__comic_strip_studio__direct_story({
   episodeId: string,
   premise: string,
   characters: string[],
@@ -670,7 +670,7 @@ await mcp__em_e_comics__direct_story({
 
 ```javascript
 // Get available style presets
-const styles = await mcp__em_e_comics__get_style_presets()
+const styles = await mcp__comic_strip_studio__get_style_presets()
 // Returns 11 presets: em-e-comics, comic-book-classic, manga-style,
 // graphic-novel, newspaper-strip, webcomic-modern, action-dynamic,
 // slice-of-life-calm, horror-dark, sci-fi-neon, fantasy-painterly

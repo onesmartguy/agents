@@ -751,7 +751,7 @@ async function generateIndexPage(episodeSlug, shotlist, outputDir) {
 
 ```javascript
 // 1. Compose beats into video (Remotion)
-await mcp__em_e_comics__compose_beats({
+await mcp__comic_strip_studio__compose_beats({
   episodeId: "pilot",
   outputPath: "output/pilot/episode.mp4",
   fps: 30,
@@ -761,7 +761,7 @@ await mcp__em_e_comics__compose_beats({
 })
 
 // 2. Assemble print pages (Canvas/PDF)
-await mcp__em_e_comics__assemble_page({
+await mcp__comic_strip_studio__assemble_page({
   episodeId: "pilot",
   pageNumber: 1,
   layout: "standard",  // or "action", "conversation"
@@ -775,14 +775,14 @@ await mcp__em_e_comics__assemble_page({
 })
 
 // 3. Render production segments (character panels, speech bubbles, effects)
-await mcp__em_e_comics__render_segment({
+await mcp__comic_strip_studio__render_segment({
   episodeId: "pilot",
   shotId: "S01",
   segmentType: "character-panel",  // or speech-bubble, comic-effect, border
   segmentData: { /* type-specific data */ }
 })
 
-await mcp__em_e_comics__render_speech_bubble({
+await mcp__comic_strip_studio__render_speech_bubble({
   episodeId: "pilot",
   shotId: "S01",
   character: "em",
@@ -792,7 +792,7 @@ await mcp__em_e_comics__render_speech_bubble({
   tailDirection: "bottom-left"
 })
 
-await mcp__em_e_comics__render_comic_effect({
+await mcp__comic_strip_studio__render_comic_effect({
   episodeId: "pilot",
   shotId: "S03",
   effectType: "impact",  // or "speed-lines", "emphasis", "action"

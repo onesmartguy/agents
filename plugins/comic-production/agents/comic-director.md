@@ -311,7 +311,7 @@ Use story development tools:
 
 ```javascript
 // 1. Create beat sheet
-await mcp__em_e_comics__create_beat_sheet({
+await mcp__comic_strip_studio__create_beat_sheet({
   episodeId: "commit-ment-issue",
   premise: "E teaches Em about git commits using her reluctance to commit to weekend plans",
   targetDuration: 300,  // 5 minutes
@@ -320,7 +320,7 @@ await mcp__em_e_comics__create_beat_sheet({
 })
 
 // 2. Draft script from beat sheet
-await mcp__em_e_comics__draft_script({
+await mcp__comic_strip_studio__draft_script({
   episodeId: "commit-ment-issue",
   beatSheetPath: "episodes/commit-ment-issue/content/beat_sheet.md",
   characterVoices: {
@@ -330,12 +330,12 @@ await mcp__em_e_comics__draft_script({
 })
 
 // 3. Validate story structure
-await mcp__em_e_comics__validate_story({
+await mcp__comic_strip_studio__validate_story({
   episodeId: "commit-ment-issue"
 })
 
 // 4. Export for review
-await mcp__em_e_comics__export_story({
+await mcp__comic_strip_studio__export_story({
   episodeId: "commit-ment-issue",
   format: "pdf",
   includeNotes: true

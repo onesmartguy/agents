@@ -475,7 +475,7 @@ def shotlist_to_prompt(shot_spec):
 
 ```javascript
 // 1. Render panel with optimized prompts
-await mcp__em_e_comics__render_panel({
+await mcp__comic_strip_studio__render_panel({
   episodeId: "pilot",
   shotId: "S01",
   // Structured prompt building (recommended)
@@ -496,14 +496,14 @@ await mcp__em_e_comics__render_panel({
 })
 
 // 2. Get style presets for prompt optimization
-const styles = await mcp__em_e_comics__get_style_presets()
+const styles = await mcp__comic_strip_studio__get_style_presets()
 // Returns 11 presets with different visual styles
 
 // 3. Test different providers for quality comparison
 // Use "gemini" ($0.002) for rapid testing
 // Use "consistent" ($0.01) for character-critical shots
 // Use "flux" ($0.03) for final hero shots
-await mcp__em_e_comics__render_panel({
+await mcp__comic_strip_studio__render_panel({
   episodeId: "pilot",
   shotId: "S01",
   prompt: "Pre-teen girl with high ponytail, wearing hoodie, frustrated expression, looking at laptop with error screen, comic book style, clean lines",

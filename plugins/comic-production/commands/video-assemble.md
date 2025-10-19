@@ -47,7 +47,7 @@ Assemble generated segments into final vertical video (1080x1920) using beat com
 
 ```javascript
 // 1. Compose beats into video
-await mcp__em_e_comics__compose_beats({
+await mcp__comic_strip_studio__compose_beats({
   episodeId: "episode_02",
   outputPath: "output/episode_02/episode.mp4",
   fps: 30,
@@ -57,7 +57,7 @@ await mcp__em_e_comics__compose_beats({
 })
 
 // 2. Render speech bubbles (called automatically)
-await mcp__em_e_comics__render_speech_bubble({
+await mcp__comic_strip_studio__render_speech_bubble({
   episodeId: "episode_02",
   shotId: "S01",
   character: "em",
@@ -68,7 +68,7 @@ await mcp__em_e_comics__render_speech_bubble({
 })
 
 // 3. Render comic effects (called automatically)
-await mcp__em_e_comics__render_comic_effect({
+await mcp__comic_strip_studio__render_comic_effect({
   episodeId: "episode_02",
   shotId: "S03",
   effectType: "impact",  // or "speed-lines", "emphasis", "action"

@@ -9,7 +9,7 @@ Comprehensive guide to using the Em & E Comics MCP server (`mcp-em-e-comics`) fo
 
 ## Overview
 
-The MCP server provides **28 specialized tools** across 8 categories for automated comic creation from story to final output. All tools use the naming convention: `mcp__em_e_comics__<tool_name>`
+The MCP server provides **28 specialized tools** across 8 categories for automated comic creation from story to final output. All tools use the naming convention: `mcp__comic_strip_studio__<tool_name>`
 
 ## Story Development Tools (5 tools)
 
@@ -18,7 +18,7 @@ The MCP server provides **28 specialized tools** across 8 categories for automat
 Generate structured beat sheet from a story premise using 3-act structure.
 
 ```javascript
-await mcp__em_e_comics__create_beat_sheet({
+await mcp__comic_strip_studio__create_beat_sheet({
   episodeId: "pilot",
   premise: "E teaches Em about debugging after her code mysteriously breaks",
   targetDuration: 60,  // seconds
@@ -37,7 +37,7 @@ await mcp__em_e_comics__create_beat_sheet({
 Create script with dialogue from beat sheet.
 
 ```javascript
-await mcp__em_e_comics__draft_script({
+await mcp__comic_strip_studio__draft_script({
   episodeId: "pilot",
   beatSheetPath: "episodes/pilot/content/beat_sheet.md",
   characterVoices: {
@@ -58,7 +58,7 @@ await mcp__em_e_comics__draft_script({
 Build shot-by-shot breakdown from script.
 
 ```javascript
-await mcp__em_e_comics__build_shotlist({
+await mcp__comic_strip_studio__build_shotlist({
   episodeId: "pilot",
   scriptPath: "episodes/pilot/content/script.md",
   targetFormat: "vertical-video",  // or "print" or "both"
@@ -76,7 +76,7 @@ await mcp__em_e_comics__build_shotlist({
 Validate story structure for pacing, character arcs, and conflicts.
 
 ```javascript
-await mcp__em_e_comics__validate_story({
+await mcp__comic_strip_studio__validate_story({
   episodeId: "pilot"
 })
 
@@ -92,7 +92,7 @@ await mcp__em_e_comics__validate_story({
 Export story content in various formats.
 
 ```javascript
-await mcp__em_e_comics__export_story({
+await mcp__comic_strip_studio__export_story({
   episodeId: "pilot",
   format: "pdf",  // or "docx", "markdown"
   includeNotes: true
@@ -106,7 +106,7 @@ await mcp__em_e_comics__export_story({
 Create character appearance from photo analysis using AI vision.
 
 ```javascript
-await mcp__em_e_comics__create_character_from_photo({
+await mcp__comic_strip_studio__create_character_from_photo({
   characterName: "em",
   photoPath: ["photos/em_front.jpg", "photos/em_side.jpg"],
   analysisPrompt: "Focus on clothing, hairstyle, and accessories",
@@ -130,7 +130,7 @@ await mcp__em_e_comics__create_character_from_photo({
 List all created characters.
 
 ```javascript
-const characters = await mcp__em_e_comics__list_characters()
+const characters = await mcp__comic_strip_studio__list_characters()
 
 // Returns array of character names and reference paths
 ```
@@ -140,7 +140,7 @@ const characters = await mcp__em_e_comics__list_characters()
 Add pose variation to character library.
 
 ```javascript
-await mcp__em_e_comics__add_character_pose({
+await mcp__comic_strip_studio__add_character_pose({
   characterName: "em",
   poseName: "confident",
   poseDescription: "Hands on hips, standing tall, slight smile",
@@ -155,7 +155,7 @@ await mcp__em_e_comics__add_character_pose({
 Add facial expression variation.
 
 ```javascript
-await mcp__em_e_comics__add_character_expression({
+await mcp__comic_strip_studio__add_character_expression({
   characterName: "em",
   expressionName: "frustrated",
   expressionDescription: "Furrowed brow, slight frown, eyes looking up",
@@ -168,7 +168,7 @@ await mcp__em_e_comics__add_character_expression({
 Add prop (object) associated with character.
 
 ```javascript
-await mcp__em_e_comics__add_character_prop({
+await mcp__comic_strip_studio__add_character_prop({
   characterName: "em",
   propName: "laptop",
   propDescription: "Modern silver laptop with coding stickers",
@@ -182,7 +182,7 @@ await mcp__em_e_comics__add_character_prop({
 Add state variation to existing prop.
 
 ```javascript
-await mcp__em_e_comics__add_prop_state({
+await mcp__comic_strip_studio__add_prop_state({
   characterName: "em",
   propName: "laptop",
   stateName: "error-screen",
@@ -195,7 +195,7 @@ await mcp__em_e_comics__add_prop_state({
 Add animation sequence to prop.
 
 ```javascript
-await mcp__em_e_comics__add_prop_animation({
+await mcp__comic_strip_studio__add_prop_animation({
   characterName: "em",
   propName: "laptop",
   animationName: "boot-up",
@@ -209,7 +209,7 @@ await mcp__em_e_comics__add_prop_animation({
 Generate comprehensive character documentation.
 
 ```javascript
-await mcp__em_e_comics__generate_character_overview({
+await mcp__comic_strip_studio__generate_character_overview({
   characterName: "em"
 })
 
@@ -228,7 +228,7 @@ await mcp__em_e_comics__generate_character_overview({
 Create environment/location from photo analysis.
 
 ```javascript
-await mcp__em_e_comics__create_environment_from_photo({
+await mcp__comic_strip_studio__create_environment_from_photo({
   environmentName: "ems-bedroom",
   photoPath: ["bedroom_wide.jpg", "bedroom_desk.jpg"],
   analysisPrompt: "Focus on desk setup, wall decorations, lighting",
@@ -249,7 +249,7 @@ await mcp__em_e_comics__create_environment_from_photo({
 List all created environments.
 
 ```javascript
-const environments = await mcp__em_e_comics__list_environments()
+const environments = await mcp__comic_strip_studio__list_environments()
 ```
 
 ### add_environment_setting
@@ -257,7 +257,7 @@ const environments = await mcp__em_e_comics__list_environments()
 Add environment variation (time of day, weather, etc.).
 
 ```javascript
-await mcp__em_e_comics__add_environment_setting({
+await mcp__comic_strip_studio__add_environment_setting({
   environmentName: "ems-bedroom",
   settingName: "morning-sunlight",
   settingDescription: "Bright sunlight streaming through window, warm golden tones"
@@ -269,7 +269,7 @@ await mcp__em_e_comics__add_environment_setting({
 Add prop to environment.
 
 ```javascript
-await mcp__em_e_comics__add_environment_prop({
+await mcp__comic_strip_studio__add_environment_prop({
   environmentName: "ems-bedroom",
   propName: "desk-lamp",
   propDescription: "Modern LED desk lamp with adjustable arm",
@@ -283,7 +283,7 @@ await mcp__em_e_comics__add_environment_prop({
 Generate comprehensive environment documentation.
 
 ```javascript
-await mcp__em_e_comics__generate_environment_overview({
+await mcp__comic_strip_studio__generate_environment_overview({
   environmentName: "ems-bedroom"
 })
 ```
@@ -302,7 +302,7 @@ Render comic panel using multi-provider system with automatic fallback.
 
 ```javascript
 // Option 1: Structured prompt building (recommended)
-await mcp__em_e_comics__render_panel({
+await mcp__comic_strip_studio__render_panel({
   episodeId: "pilot",
   shotId: "S01",
   characters: ["em", "e"],
@@ -323,7 +323,7 @@ await mcp__em_e_comics__render_panel({
 })
 
 // Option 2: Raw prompt (bypasses prompt builder)
-await mcp__em_e_comics__render_panel({
+await mcp__comic_strip_studio__render_panel({
   episodeId: "pilot",
   shotId: "S02",
   prompt: "Pre-teen girl with high ponytail, wearing hoodie, frustrated expression, looking at laptop with error screen, comic book style, clean lines",
@@ -348,7 +348,7 @@ await mcp__em_e_comics__render_panel({
 List available image generation providers and their status.
 
 ```javascript
-const providers = await mcp__em_e_comics__list_providers()
+const providers = await mcp__comic_strip_studio__list_providers()
 
 // Returns:
 // [
@@ -375,7 +375,7 @@ const providers = await mcp__em_e_comics__list_providers()
 Get detailed information about a specific provider.
 
 ```javascript
-await mcp__em_e_comics__get_provider_info({
+await mcp__comic_strip_studio__get_provider_info({
   provider: "gemini"
 })
 
@@ -389,7 +389,7 @@ await mcp__em_e_comics__get_provider_info({
 Render comic segment (character-panel, speech-bubble, comic-effect, border).
 
 ```javascript
-await mcp__em_e_comics__render_segment({
+await mcp__comic_strip_studio__render_segment({
   episodeId: "pilot",
   shotId: "S01",
   segmentType: "character-panel",  // or speech-bubble, comic-effect, border
@@ -402,7 +402,7 @@ await mcp__em_e_comics__render_segment({
 Render speech bubble with text.
 
 ```javascript
-await mcp__em_e_comics__render_speech_bubble({
+await mcp__comic_strip_studio__render_speech_bubble({
   episodeId: "pilot",
   shotId: "S01",
   character: "em",
@@ -418,7 +418,7 @@ await mcp__em_e_comics__render_speech_bubble({
 Render comic visual effect (speed lines, impact, etc.).
 
 ```javascript
-await mcp__em_e_comics__render_comic_effect({
+await mcp__comic_strip_studio__render_comic_effect({
   episodeId: "pilot",
   shotId: "S03",
   effectType: "impact",  // or "speed-lines", "emphasis", "action"
@@ -434,7 +434,7 @@ await mcp__em_e_comics__render_comic_effect({
 Compose rendered segments into video beats (Remotion).
 
 ```javascript
-await mcp__em_e_comics__compose_beats({
+await mcp__comic_strip_studio__compose_beats({
   episodeId: "pilot",
   outputPath: "output/pilot/episode.mp4",
   fps: 30,
@@ -452,7 +452,7 @@ await mcp__em_e_comics__compose_beats({
 Assemble segments into print comic pages (Canvas).
 
 ```javascript
-await mcp__em_e_comics__assemble_page({
+await mcp__comic_strip_studio__assemble_page({
   episodeId: "pilot",
   pageNumber: 1,
   layout: "standard",  // or "action", "conversation"
@@ -478,7 +478,7 @@ await mcp__em_e_comics__assemble_page({
 High-level workflow orchestration - automates entire pipeline.
 
 ```javascript
-await mcp__em_e_comics__direct_story({
+await mcp__comic_strip_studio__direct_story({
   episodeId: "pilot",
   premise: "E teaches Em about debugging",
   characters: ["em", "e"],
@@ -504,7 +504,7 @@ await mcp__em_e_comics__direct_story({
 Get available style presets for panel generation.
 
 ```javascript
-const styles = await mcp__em_e_comics__get_style_presets()
+const styles = await mcp__comic_strip_studio__get_style_presets()
 
 // Returns 11 presets:
 // - em-e-comics (default)
@@ -520,7 +520,7 @@ const styles = await mcp__em_e_comics__get_style_presets()
 // - fantasy-painterly
 
 // Use in render_panel:
-await mcp__em_e_comics__render_panel({
+await mcp__comic_strip_studio__render_panel({
   episodeId: "pilot",
   shotId: "S01",
   style: "manga-style",
@@ -535,24 +535,24 @@ await mcp__em_e_comics__render_panel({
 ```javascript
 async function produceEpisode() {
   // 1. Create characters from photos
-  await mcp__em_e_comics__create_character_from_photo({
+  await mcp__comic_strip_studio__create_character_from_photo({
     characterName: "em",
     photoPath: ["photos/em_front.jpg", "photos/em_side.jpg"]
   })
 
-  await mcp__em_e_comics__create_character_from_photo({
+  await mcp__comic_strip_studio__create_character_from_photo({
     characterName: "e",
     photoPath: ["photos/e_portrait.jpg"]
   })
 
   // 2. Create environment
-  await mcp__em_e_comics__create_environment_from_photo({
+  await mcp__comic_strip_studio__create_environment_from_photo({
     environmentName: "ems-bedroom",
     photoPath: ["bedroom.jpg"]
   })
 
   // 3. Story development
-  const beatSheet = await mcp__em_e_comics__create_beat_sheet({
+  const beatSheet = await mcp__comic_strip_studio__create_beat_sheet({
     episodeId: "pilot",
     premise: "E teaches Em about debugging",
     targetDuration: 60,
@@ -561,13 +561,13 @@ async function produceEpisode() {
   })
 
   // 4. Script drafting (review/edit manually)
-  await mcp__em_e_comics__draft_script({
+  await mcp__comic_strip_studio__draft_script({
     episodeId: "pilot",
     beatSheetPath: "episodes/pilot/content/beat_sheet.md"
   })
 
   // 5. Shotlist creation
-  const shotlist = await mcp__em_e_comics__build_shotlist({
+  const shotlist = await mcp__comic_strip_studio__build_shotlist({
     episodeId: "pilot",
     scriptPath: "episodes/pilot/content/script.md",
     targetFormat: "vertical-video"
@@ -576,7 +576,7 @@ async function produceEpisode() {
   // 6. Panel generation (batch)
   const shots = JSON.parse(shotlist).shots
   for (const shot of shots) {
-    await mcp__em_e_comics__render_panel({
+    await mcp__comic_strip_studio__render_panel({
       episodeId: "pilot",
       shotId: shot.shot_id,
       characters: shot.characters,
@@ -590,7 +590,7 @@ async function produceEpisode() {
   }
 
   // 7. Assembly
-  await mcp__em_e_comics__compose_beats({
+  await mcp__comic_strip_studio__compose_beats({
     episodeId: "pilot",
     outputPath: "output/pilot/episode.mp4",
     fps: 30
@@ -606,39 +606,39 @@ async function produceEpisode() {
 // Create character with variations
 async function setupCharacter(name, photos) {
   // 1. Base character from photos
-  await mcp__em_e_comics__create_character_from_photo({
+  await mcp__comic_strip_studio__create_character_from_photo({
     characterName: name,
     photoPath: photos
   })
 
   // 2. Add poses
-  await mcp__em_e_comics__add_character_pose({
+  await mcp__comic_strip_studio__add_character_pose({
     characterName: name,
     poseName: "confident",
     poseDescription: "Hands on hips, standing tall"
   })
 
-  await mcp__em_e_comics__add_character_pose({
+  await mcp__comic_strip_studio__add_character_pose({
     characterName: name,
     poseName: "thinking",
     poseDescription: "Hand on chin, looking up"
   })
 
   // 3. Add expressions
-  await mcp__em_e_comics__add_character_expression({
+  await mcp__comic_strip_studio__add_character_expression({
     characterName: name,
     expressionName: "happy",
     expressionDescription: "Wide smile, bright eyes"
   })
 
-  await mcp__em_e_comics__add_character_expression({
+  await mcp__comic_strip_studio__add_character_expression({
     characterName: name,
     expressionName: "frustrated",
     expressionDescription: "Furrowed brow, slight frown"
   })
 
   // 4. Add props
-  await mcp__em_e_comics__add_character_prop({
+  await mcp__comic_strip_studio__add_character_prop({
     characterName: name,
     propName: "laptop",
     propDescription: "Modern silver laptop with stickers",
@@ -646,7 +646,7 @@ async function setupCharacter(name, photos) {
   })
 
   // 5. Generate documentation
-  await mcp__em_e_comics__generate_character_overview({
+  await mcp__comic_strip_studio__generate_character_overview({
     characterName: name
   })
 }
@@ -664,7 +664,7 @@ await setupCharacter("em", [
 // Quick story testing without full production
 async function rapidPrototype() {
   // 1. Beat sheet only
-  await mcp__em_e_comics__create_beat_sheet({
+  await mcp__comic_strip_studio__create_beat_sheet({
     episodeId: "test-01",
     premise: "Em discovers a bug in production",
     targetDuration: 30,
@@ -672,7 +672,7 @@ async function rapidPrototype() {
   })
 
   // 2. Validate story
-  const validation = await mcp__em_e_comics__validate_story({
+  const validation = await mcp__comic_strip_studio__validate_story({
     episodeId: "test-01"
   })
 
@@ -682,7 +682,7 @@ async function rapidPrototype() {
   }
 
   // 3. Generate just 2-3 key panels
-  await mcp__em_e_comics__render_panel({
+  await mcp__comic_strip_studio__render_panel({
     episodeId: "test-01",
     shotId: "S01-opener",
     prompt: "Girl at computer, shocked expression, error dialog on screen",
@@ -754,7 +754,7 @@ for (let i = 0; i < shots.length; i += BATCH_SIZE) {
 ```javascript
 // Problem: Characters look different between panels
 // Solution 1: Use referenceImage
-await mcp__em_e_comics__render_panel({
+await mcp__comic_strip_studio__render_panel({
   ...
   referenceImage: "characters/references/em_front.png"
 })
@@ -763,7 +763,7 @@ await mcp__em_e_comics__render_panel({
 provider: "consistent"
 
 // Solution 3: Add more detail to character appearance
-await mcp__em_e_comics__add_character_expression({
+await mcp__comic_strip_studio__add_character_expression({
   characterName: "em",
   expressionName: "neutral",
   expressionDescription: "Relaxed face, slight smile, looking forward, dark brown eyes, freckles on nose"
@@ -775,11 +775,11 @@ await mcp__em_e_comics__add_character_expression({
 ```javascript
 // Provider fallback should handle most issues
 // But if all providers fail:
-const providers = await mcp__em_e_comics__list_providers()
+const providers = await mcp__comic_strip_studio__list_providers()
 // Check which providers are available
 
 // Try specific provider
-await mcp__em_e_comics__render_panel({
+await mcp__comic_strip_studio__render_panel({
   ...
   provider: "local"  // Fallback to local ComfyUI
 })
@@ -795,7 +795,7 @@ async function batchGenerate(shots, batchSize = 3) {
   for (const batch of batches) {
     await Promise.all(
       batch.map(shot =>
-        mcp__em_e_comics__render_panel({
+        mcp__comic_strip_studio__render_panel({
           episodeId: "pilot",
           shotId: shot.id,
           characters: shot.characters,

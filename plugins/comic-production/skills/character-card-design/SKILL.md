@@ -218,7 +218,7 @@ async function createCharacter(characterData) {
   // await trainLoRA(trainingData)
 
   // 6. Register with MCP
-  await mcp__em_e_comics__create_character({
+  await mcp__comic_strip_studio__create_character({
     slug: characterData.slug,
     base_prompt: characterData.base_prompt,
     ref_images: refs.map(r => r.path)

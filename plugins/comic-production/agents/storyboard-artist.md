@@ -662,7 +662,7 @@ Shotlist informs:
 
 ```javascript
 // Build shotlist from script
-await mcp__em_e_comics__build_shotlist({
+await mcp__comic_strip_studio__build_shotlist({
   episodeId: "pilot",
   scriptPath: "episodes/pilot/content/script.md",
   targetFormat: "both",  // "vertical-video", "print", or "both"

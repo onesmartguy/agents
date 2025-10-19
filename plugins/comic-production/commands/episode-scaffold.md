@@ -42,21 +42,21 @@ Create a new comic episode with complete directory structure and photo-based ass
 
 ```javascript
 // 1. Create characters from photos
-await mcp__em_e_comics__create_character_from_photo({
+await mcp__comic_strip_studio__create_character_from_photo({
   characterName: "em",
   photoPath: ["photos/em_front.jpg", "photos/em_side.jpg"],
   analysisPrompt: "Focus on clothing, hairstyle, accessories"
 })
 
 // 2. Create environment from photos
-await mcp__em_e_comics__create_environment_from_photo({
+await mcp__comic_strip_studio__create_environment_from_photo({
   environmentName: "ems-bedroom",
   photoPath: ["bedroom_wide.jpg", "bedroom_desk.jpg"],
   analysisPrompt: "Focus on desk setup, wall decorations, lighting"
 })
 
 // 3. Create beat sheet
-await mcp__em_e_comics__create_beat_sheet({
+await mcp__comic_strip_studio__create_beat_sheet({
   episodeId: "episode_02",
   premise: "Story premise here",
   targetDuration: 300,
