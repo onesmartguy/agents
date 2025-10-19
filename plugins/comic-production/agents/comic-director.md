@@ -307,13 +307,38 @@ For new characters or props:
 
 ### MCP Integration
 
-Use `mcp__em_e_comics__create_episode` tool:
+Use story development tools:
+
 ```javascript
-await mcp__em_e_comics__create_episode({
-  title: "The Commit-ment Issue",
-  logline: "E teaches Em about git using weekend plans",
-  target_duration: 300,  // 5 minutes
-  output_format: "both"   // vertical-video and print
+// 1. Create beat sheet
+await mcp__em_e_comics__create_beat_sheet({
+  episodeId: "commit-ment-issue",
+  premise: "E teaches Em about git commits using her reluctance to commit to weekend plans",
+  targetDuration: 300,  // 5 minutes
+  genre: "comedy",
+  characters: ["em", "e"]
+})
+
+// 2. Draft script from beat sheet
+await mcp__em_e_comics__draft_script({
+  episodeId: "commit-ment-issue",
+  beatSheetPath: "episodes/commit-ment-issue/content/beat_sheet.md",
+  characterVoices: {
+    "em": "curious, enthusiastic, sometimes frustrated",
+    "e": "patient, technical, encouraging"
+  }
+})
+
+// 3. Validate story structure
+await mcp__em_e_comics__validate_story({
+  episodeId: "commit-ment-issue"
+})
+
+// 4. Export for review
+await mcp__em_e_comics__export_story({
+  episodeId: "commit-ment-issue",
+  format: "pdf",
+  includeNotes: true
 })
 ```
 

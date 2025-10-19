@@ -474,16 +474,42 @@ def shotlist_to_prompt(shot_spec):
 ### MCP Integration
 
 ```javascript
-// Generate optimized prompts
-await mcp__em_e_comics__generate_prompts({
-  shot_id: "S01",
-  optimize_for: "character_consistency"
+// 1. Render panel with optimized prompts
+await mcp__em_e_comics__render_panel({
+  episodeId: "pilot",
+  shotId: "S01",
+  // Structured prompt building (recommended)
+  characters: ["em", "e"],
+  env: "ems-bedroom",
+  camera: "medium-wide, rule-of-thirds, eye-level",
+  style: "em-e-comics",  // Use style presets
+  characterAppearances: [  // Optional overrides for this panel
+    {
+      character: "em",
+      clothing: "pajamas with code patterns",
+      notes: "just woke up"
+    }
+  ],
+  width: 768,
+  height: 1365,
+  provider: "gemini"  // Fast, cheap for testing prompts
 })
 
-// Test prompt variations
-await mcp__em_e_comics__test_prompt_variations({
-  shot_id: "S01",
-  variations: ["style_a", "style_b", "style_c"]
+// 2. Get style presets for prompt optimization
+const styles = await mcp__em_e_comics__get_style_presets()
+// Returns 11 presets with different visual styles
+
+// 3. Test different providers for quality comparison
+// Use "gemini" ($0.002) for rapid testing
+// Use "consistent" ($0.01) for character-critical shots
+// Use "flux" ($0.03) for final hero shots
+await mcp__em_e_comics__render_panel({
+  episodeId: "pilot",
+  shotId: "S01",
+  prompt: "Pre-teen girl with high ponytail, wearing hoodie, frustrated expression, looking at laptop with error screen, comic book style, clean lines",
+  negativePrompt: "blurry, realistic, photograph, multiple heads",
+  referenceImage: "characters/references/em_front.png",  // For consistency
+  provider: "gemini"
 })
 ```
 

@@ -750,25 +750,54 @@ async function generateIndexPage(episodeSlug, shotlist, outputDir) {
 ## MCP Integration
 
 ```javascript
-// Assemble episode via MCP
-await mcp__em_e_comics__assemble_episode({
-  episode_slug: "pilot",
-  output_formats: ["vertical-video", "print-pdf"],
-  generate_artifacts_website: true
+// 1. Compose beats into video (Remotion)
+await mcp__em_e_comics__compose_beats({
+  episodeId: "pilot",
+  outputPath: "output/pilot/episode.mp4",
+  fps: 30,
+  quality: 80,
+  format: "mp4",  // or "webm"
+  includeAudio: true  // if audio tracks exist
 })
 
-// Render video
-await mcp__em_e_comics__render_video({
-  episode_slug: "pilot",
-  output_path: "episodes/pilot/output/episode.mp4",
-  quality: 80
+// 2. Assemble print pages (Canvas/PDF)
+await mcp__em_e_comics__assemble_page({
+  episodeId: "pilot",
+  pageNumber: 1,
+  layout: "standard",  // or "action", "conversation"
+  format: "pdf",  // or "png", "both"
+  outputPath: "output/pilot/pages.pdf",
+  pageSize: {
+    width: 6.875,   // inches
+    height: 10.5,   // inches
+    dpi: 300
+  }
 })
 
-// Export pages
-await mcp__em_e_comics__export_pages({
-  episode_slug: "pilot",
-  format: "pdf",
-  output_path: "episodes/pilot/output/pages.pdf"
+// 3. Render production segments (character panels, speech bubbles, effects)
+await mcp__em_e_comics__render_segment({
+  episodeId: "pilot",
+  shotId: "S01",
+  segmentType: "character-panel",  // or speech-bubble, comic-effect, border
+  segmentData: { /* type-specific data */ }
+})
+
+await mcp__em_e_comics__render_speech_bubble({
+  episodeId: "pilot",
+  shotId: "S01",
+  character: "em",
+  text: "Why isn't this working?!",
+  bubbleType: "speech",  // or "thought", "shout", "whisper"
+  position: { x: 0.5, y: 0.2 },  // normalized 0-1
+  tailDirection: "bottom-left"
+})
+
+await mcp__em_e_comics__render_comic_effect({
+  episodeId: "pilot",
+  shotId: "S03",
+  effectType: "impact",  // or "speed-lines", "emphasis", "action"
+  position: { x: 0.7, y: 0.5 },
+  intensity: 0.8
 })
 ```
 

@@ -1,8 +1,8 @@
 ---
-description: Generate comic panels from shotlist using ComfyUI with character consistency. Activates panel-generator and prompt-engineer-comics agents.
+description: Generate comic panels using multi-provider image generation (Gemini, Replicate, FLUX, ComfyUI). Activates panel-generator and prompt-engineer-comics agents.
 ---
 
-Generate all comic panel segments from shotlist using ComfyUI workflows with InstantID, LoRA, and ControlNet.
+Generate all comic panel segments using multi-provider image generation system with automatic fallback.
 
 ## Usage
 
@@ -12,70 +12,120 @@ Generate all comic panel segments from shotlist using ComfyUI workflows with Ins
 
 ## Arguments
 
-- `episode-slug`: Episode to generate (uses WORKING_EPISODE if not specified)
+- `episode-slug`: Episode to generate (uses current directory if not specified)
 - `--shots`: Specific shot IDs to generate (comma-separated)
-- `--batch-size`: Number of panels to generate in parallel (default: 5)
-- `--quality`: Quality preset - "draft", "standard", "high" (default: "standard")
+- `--provider`: Image provider - "auto", "gemini", "consistent", "flux", "local" (default: "auto")
+- `--quality`: Style preset (default: "em-e-comics")
 
 ## What It Does
 
-1. Loads shotlist and character cards
-2. Groups shots by characters for efficiency
-3. Loads character models (LoRA, InstantID references)
-4. Generates character panels with consistency stack
-5. Creates segment files (panels, effects)
-6. Updates generation progress
-7. Saves to `episodes/{episode}/segments/`
+1. Loads shotlist and character/environment references
+2. Renders panels using multi-provider fallback system
+3. Applies character consistency techniques
+4. Generates segments with proper sizing (768x1365 for 9:16 video)
+5. Saves to `episodes/{episode}/output/panels/`
 
 ## Example
 
 ```bash
-# Generate all panels
-export WORKING_EPISODE=pilot
-/comic-production:panels-generate
+# Generate all panels with auto provider fallback
+/comic-production:panels-generate episode_02
 
-# Generate specific shots
-/comic-production:panels-generate episode_02 --shots S01,S02,S03
+# Generate specific shots with Gemini (fast, cheap)
+/comic-production:panels-generate episode_02 --shots S01,S02,S03 --provider gemini
 
-# High quality generation
-/comic-production:panels-generate --quality high
-
-# Larger batch size (requires more VRAM)
-/comic-production:panels-generate --batch-size 10
+# High quality with FLUX
+/comic-production:panels-generate --provider flux --quality graphic-novel
 ```
 
-## Quality Presets
+## MCP Tools Used
 
-**draft** (fast):
-- Steps: 15
-- Resolution: 512x768 (upscaled to 1024x1536)
-- Use for: Quick previews, testing
+```javascript
+// 1. Render panel with auto provider fallback
+await mcp__em_e_comics__render_panel({
+  episodeId: "episode_02",
+  shotId: "S01",
+  characters: ["em", "e"],
+  env: "ems-bedroom",
+  camera: "medium-wide, rule-of-thirds, eye-level",
+  style: "em-e-comics",
+  width: 768,
+  height: 1365,  // 9:16 vertical video
+  provider: "auto"  // Fallback: Gemini → Consistent → FLUX → Local
+})
 
-**standard** (balanced):
-- Steps: 25
-- Resolution: 1024x1536
-- Use for: Production
+// 2. List available providers
+const providers = await mcp__em_e_comics__list_providers()
+// Returns: gemini-2.5-flash ($0.002), replicate-consistent-character ($0.01),
+//          replicate-flux ($0.03), comfyui-local (free)
 
-**high** (slow):
-- Steps: 35
-- Resolution: 1024x1536
-- Additional refinement passes
-- Use for: Final renders, key panels
+// 3. Get provider details
+await mcp__em_e_comics__get_provider_info({
+  provider: "gemini"
+})
+
+// 4. Get style presets
+const styles = await mcp__em_e_comics__get_style_presets()
+// Returns 11 presets: em-e-comics, comic-book-classic, manga-style,
+// graphic-novel, newspaper-strip, webcomic-modern, action-dynamic,
+// slice-of-life-calm, horror-dark, sci-fi-neon, fantasy-painterly
+```
+
+## Provider Selection
+
+**Auto** (recommended):
+- Tries providers in order: Gemini → Consistent → FLUX → Local
+- Automatic fallback on failure
+- Cost-optimized
+
+**Gemini 2.5 Flash**:
+- Cost: $0.002/image
+- Speed: 4-6s
+- Best for: Rapid iteration, testing, wide shots
+- Character consistency: Good
+
+**Replicate Consistent Character**:
+- Cost: $0.01/image
+- Speed: 10-15s
+- Best for: Character-critical shots, close-ups
+- Character consistency: Excellent
+
+**Replicate FLUX**:
+- Cost: $0.03/image
+- Speed: 15-20s
+- Best for: Hero shots, final renders
+- Character consistency: Excellent
+
+**Local ComfyUI**:
+- Cost: Free
+- Speed: Varies (GPU-dependent)
+- Best for: Full control, testing, no API limits
+- Requires: ComfyUI setup
+
+## Style Presets
+
+Available via `get_style_presets`:
+- `em-e-comics` (default) - Clean modern comic style
+- `comic-book-classic` - Traditional American comics
+- `manga-style` - Japanese manga influence
+- `graphic-novel` - Sophisticated illustration
+- `webcomic-modern` - Digital webcomic style
+- `action-dynamic` - High-energy action scenes
+- `slice-of-life-calm` - Gentle everyday moments
 
 ## Progress Monitoring
 
 ```bash
-# Check progress
-/comic-production:panels-generate --status
-
-# Output:
-# Completed: 15/40 panels (37.5%)
-# Current: Generating S16_character_panel
-# Estimated time remaining: 45 minutes
+# Panels are generated with progress feedback
+# ✅ Panel S01 rendered successfully!
+# 📁 Output: output/pilot/panels/S01.png
+# 🎨 Provider: gemini-2.5-flash
+# ⏱️  Duration: 4.2s
+# 💰 Cost: $0.002
 ```
 
 ## Next Steps
 
-1. Review generated panels in `segments/` directory
-2. Regenerate any unsatisfactory panels
+1. Review generated panels in `output/panels/` directory
+2. Regenerate any unsatisfactory panels with different provider
 3. Run `/comic-production:video-assemble` or `/comic-production:page-assemble`

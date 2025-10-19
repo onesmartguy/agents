@@ -534,19 +534,50 @@ const panelSpec = {
 ### MCP Integration
 
 ```javascript
-// Create character
-await mcp__em_e_comics__create_character({
-  slug: "em",
-  base_prompt: "pre-teen girl, high ponytail, sporty dark blue hoodie, white hi-top sneakers",
-  ref_images: ["characters/em/refs/head01.png"]
+// 1. Create character from photo analysis
+await mcp__em_e_comics__create_character_from_photo({
+  characterName: "em",
+  photoPath: [
+    "photos/em_front.jpg",
+    "photos/em_side.jpg",
+    "photos/em_3quarter.jpg"
+  ],
+  analysisPrompt: "Focus on clothing, hairstyle, and accessories. Note athletic build and confident stance.",
+  updateExisting: false  // false = replace, true = merge
 })
 
-// Update character with LoRA
-await mcp__em_e_comics__update_character({
-  slug: "em",
-  lora_path: "characters/em/lora/em_v1.safetensors",
-  trigger_word: "em_character"
+// 2. Add pose variations
+await mcp__em_e_comics__add_character_pose({
+  characterName: "em",
+  poseName: "confident",
+  poseDescription: "Hands on hips, standing tall, slight smile",
+  referenceImage: "poses/em_confident.png"  // optional
 })
+
+// 3. Add expressions
+await mcp__em_e_comics__add_character_expression({
+  characterName: "em",
+  expressionName: "frustrated",
+  expressionDescription: "Furrowed brow, slight frown, eyes looking up",
+  referenceImage: "expressions/em_frustrated.png"  // optional
+})
+
+// 4. Add character props
+await mcp__em_e_comics__add_character_prop({
+  characterName: "em",
+  propName: "laptop",
+  propDescription: "Modern silver laptop with coding stickers",
+  defaultState: "open",
+  interactions: ["typing", "closing", "frustrated-stare"]
+})
+
+// 5. Generate comprehensive documentation
+await mcp__em_e_comics__generate_character_overview({
+  characterName: "em"
+})
+
+// 6. List all characters
+const characters = await mcp__em_e_comics__list_characters()
 ```
 
 ## Resources

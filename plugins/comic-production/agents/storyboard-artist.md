@@ -661,18 +661,21 @@ Shotlist informs:
 ### MCP Integration
 
 ```javascript
-// Create shotlist from beat sheet
-await mcp__em_e_comics__create_shotlist({
-  episode_slug: "pilot",
-  beat_sheet_path: "episodes/pilot/content/beat_sheet.md",
-  output_format: "both"  // vertical-video and print
+// Build shotlist from script
+await mcp__em_e_comics__build_shotlist({
+  episodeId: "pilot",
+  scriptPath: "episodes/pilot/content/script.md",
+  targetFormat: "both",  // "vertical-video", "print", or "both"
+  avgShotDuration: 3  // seconds per shot for video
 })
 
-// Update shot
-await mcp__em_e_comics__update_shot({
-  shot_id: "S01",
-  panel_updates: { /* changes */ }
-})
+// Validates:
+// - Shot-by-shot breakdown
+// - Camera angles and compositions
+// - Character assignments
+// - Dialogue/speech bubbles
+// - Segment specifications
+// - Timing information
 ```
 
 ## Resources

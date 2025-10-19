@@ -414,7 +414,7 @@
       "name": "llm-application-dev",
       "source": "./plugins/llm-application-dev",
       "description": "LLM application development, prompt engineering, and AI assistant optimization",
-      "version": "1.2.1",
+      "version": "1.2.2",
       "author": {
         "name": "Seth Hobson",
         "url": "https://github.com/wshobson"
@@ -428,7 +428,8 @@
         "prompt-engineering",
         "langchain",
         "gpt",
-        "claude"
+        "claude",
+        "mcp"
       ],
       "category": "ai-ml",
       "strict": false,
@@ -445,14 +446,15 @@
         "./skills/langchain-architecture",
         "./skills/llm-evaluation",
         "./skills/prompt-engineering-patterns",
-        "./skills/rag-implementation"
+        "./skills/rag-implementation",
+        "./skills/mcp-server-development"
       ]
     },
     {
       "name": "agent-orchestration",
       "source": "./plugins/agent-orchestration",
       "description": "Multi-agent system optimization, agent improvement workflows, and context management",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "author": {
         "name": "Seth Hobson",
         "url": "https://github.com/wshobson"
@@ -464,7 +466,8 @@
         "multi-agent",
         "orchestration",
         "ai-agents",
-        "optimization"
+        "optimization",
+        "mcp"
       ],
       "category": "ai-ml",
       "strict": false,
@@ -474,6 +477,9 @@
       ],
       "agents": [
         "./agents/context-manager.md"
+      ],
+      "skills": [
+        "./skills/mcp-server-patterns"
       ]
     },
     {

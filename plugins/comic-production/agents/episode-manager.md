@@ -425,111 +425,255 @@ console.log(metrics)
 
 ## MCP Tool Reference
 
-### Episode Management
+All 28 actual tools organized by category:
+
+### Story Development Tools (5)
 
 ```javascript
-// Create episode
-await mcp__em_e_comics__create_episode({
-  title: string,
-  logline: string,
-  target_duration: number,
-  output_format: "vertical-video" | "print" | "both"
+// Create beat sheet from premise
+await mcp__em_e_comics__create_beat_sheet({
+  episodeId: string,
+  premise: string,
+  targetDuration: number,  // seconds
+  genre: string,
+  characters: string[]
 })
 
-// Update episode
-await mcp__em_e_comics__update_episode({
-  status?: string,
+// Draft script from beat sheet
+await mcp__em_e_comics__draft_script({
+  episodeId: string,
+  beatSheetPath: string,
+  characterVoices: object
+})
+
+// Build shotlist from script
+await mcp__em_e_comics__build_shotlist({
+  episodeId: string,
+  scriptPath: string,
+  targetFormat: "vertical-video" | "print" | "both",
+  avgShotDuration: number
+})
+
+// Validate story structure
+await mcp__em_e_comics__validate_story({
+  episodeId: string
+})
+
+// Export story content
+await mcp__em_e_comics__export_story({
+  episodeId: string,
+  format: "pdf" | "docx" | "markdown",
+  includeNotes: boolean
+})
+```
+
+### Character Tools (8)
+
+```javascript
+// Create character from photo analysis
+await mcp__em_e_comics__create_character_from_photo({
+  characterName: string,
+  photoPath: string[],
+  analysisPrompt: string,
+  updateExisting: boolean
+})
+
+// List all characters
+const characters = await mcp__em_e_comics__list_characters()
+
+// Add pose variation
+await mcp__em_e_comics__add_character_pose({
+  characterName: string,
+  poseName: string,
+  poseDescription: string,
+  referenceImage?: string
+})
+
+// Add expression variation
+await mcp__em_e_comics__add_character_expression({
+  characterName: string,
+  expressionName: string,
+  expressionDescription: string,
+  referenceImage?: string
+})
+
+// Add character prop
+await mcp__em_e_comics__add_character_prop({
+  characterName: string,
+  propName: string,
+  propDescription: string,
+  defaultState: string,
+  interactions: string[]
+})
+
+// Add prop state
+await mcp__em_e_comics__add_prop_state({
+  characterName: string,
+  propName: string,
+  stateName: string,
+  stateDescription: string
+})
+
+// Add prop animation
+await mcp__em_e_comics__add_prop_animation({
+  characterName: string,
+  propName: string,
+  animationName: string,
+  frames: string[],
+  duration: number
+})
+
+// Generate character overview
+await mcp__em_e_comics__generate_character_overview({
+  characterName: string
+})
+```
+
+### Environment Tools (5)
+
+```javascript
+// Create environment from photo
+await mcp__em_e_comics__create_environment_from_photo({
+  environmentName: string,
+  photoPath: string[],
+  analysisPrompt: string,
+  updateExisting: boolean
+})
+
+// List all environments
+const environments = await mcp__em_e_comics__list_environments()
+
+// Add environment setting
+await mcp__em_e_comics__add_environment_setting({
+  environmentName: string,
+  settingName: string,
+  settingDescription: string
+})
+
+// Add environment prop
+await mcp__em_e_comics__add_environment_prop({
+  environmentName: string,
+  propName: string,
+  propDescription: string,
+  defaultState: string,
+  interactions: string[]
+})
+
+// Generate environment overview
+await mcp__em_e_comics__generate_environment_overview({
+  environmentName: string
+})
+```
+
+### Image Generation Tools (3)
+
+```javascript
+// Render panel with multi-provider fallback
+await mcp__em_e_comics__render_panel({
+  episodeId: string,
+  shotId: string,
   characters?: string[],
-  shots?: string[],
-  [key: string]: any
+  env?: string,
+  camera?: string,
+  style?: string,
+  characterAppearances?: object[],
+  prompt?: string,  // Raw prompt option
+  negativePrompt?: string,
+  referenceImage?: string,
+  width: number,
+  height: number,
+  provider: "auto" | "gemini" | "consistent" | "flux" | "local",
+  outputPath?: string
 })
 
-// Get episode
-const episode = await mcp__em_e_comics__get_episode()
+// List available providers
+const providers = await mcp__em_e_comics__list_providers()
 
-// List episodes
-const episodes = await mcp__em_e_comics__list_episodes()
-
-// Delete episode
-await mcp__em_e_comics__delete_episode()
-```
-
-### Character Management
-
-```javascript
-// Create character
-await mcp__em_e_comics__create_character({
-  slug: string,
-  base_prompt: string,
-  ref_images: string[]
-})
-
-// Update character
-await mcp__em_e_comics__update_character({
-  slug: string,
-  lora_path?: string,
-  trigger_word?: string,
-  [key: string]: any
-})
-
-// Get character
-const character = await mcp__em_e_comics__get_character({
-  slug: string
+// Get provider information
+await mcp__em_e_comics__get_provider_info({
+  provider: string
 })
 ```
 
-### Shotlist & Generation
+### Production Tools (3)
 
 ```javascript
-// Create shotlist
-await mcp__em_e_comics__create_shotlist({
-  beat_sheet_path: string,
-  output_format: "vertical-video" | "print" | "both"
+// Render segment
+await mcp__em_e_comics__render_segment({
+  episodeId: string,
+  shotId: string,
+  segmentType: "character-panel" | "speech-bubble" | "comic-effect" | "border",
+  segmentData: object
 })
 
-// Update shot
-await mcp__em_e_comics__update_shot({
-  shot_id: string,
-  panel_updates: object
+// Render speech bubble
+await mcp__em_e_comics__render_speech_bubble({
+  episodeId: string,
+  shotId: string,
+  character: string,
+  text: string,
+  bubbleType: "speech" | "thought" | "shout" | "whisper",
+  position: { x: number, y: number },
+  tailDirection: string
 })
 
-// Generate panel
-await mcp__em_e_comics__generate_panel({
-  shot_id: string,
-  segment_id: string,
-  character_refs: string[],
-  output_path: string
+// Render comic effect
+await mcp__em_e_comics__render_comic_effect({
+  episodeId: string,
+  shotId: string,
+  effectType: "impact" | "speed-lines" | "emphasis" | "action",
+  position: { x: number, y: number },
+  intensity: number
 })
-
-// Batch generate
-await mcp__em_e_comics__batch_generate_shots({
-  shot_ids: string[]
-})
-
-// Get progress
-const progress = await mcp__em_e_comics__get_generation_progress()
 ```
 
-### Assembly
+### Assembly Tools (2)
 
 ```javascript
-// Assemble episode
-await mcp__em_e_comics__assemble_episode({
-  output_formats: string[],
-  generate_artifacts_website: boolean
+// Compose beats into video
+await mcp__em_e_comics__compose_beats({
+  episodeId: string,
+  outputPath: string,
+  fps: number,
+  quality: number,
+  format: "mp4" | "webm",
+  includeAudio: boolean
 })
 
-// Render video
-await mcp__em_e_comics__render_video({
-  output_path: string,
-  quality: number
+// Assemble print pages
+await mcp__em_e_comics__assemble_page({
+  episodeId: string,
+  pageNumber: number,
+  layout: "standard" | "action" | "conversation",
+  format: "pdf" | "png" | "both",
+  outputPath: string,
+  pageSize: { width: number, height: number, dpi: number }
 })
+```
 
-// Export pages
-await mcp__em_e_comics__export_pages({
-  format: "pdf" | "png",
-  output_path: string
+### Orchestration Tools (1)
+
+```javascript
+// High-level workflow automation
+await mcp__em_e_comics__direct_story({
+  episodeId: string,
+  premise: string,
+  characters: string[],
+  targetDuration: number,
+  outputFormat: "vertical-video" | "print" | "both",
+  autoGenerate: boolean,
+  maxPanelsPerDay: number
 })
+```
+
+### Style Tools (1)
+
+```javascript
+// Get available style presets
+const styles = await mcp__em_e_comics__get_style_presets()
+// Returns 11 presets: em-e-comics, comic-book-classic, manga-style,
+// graphic-novel, newspaper-strip, webcomic-modern, action-dynamic,
+// slice-of-life-calm, horror-dark, sci-fi-neon, fantasy-painterly
 ```
 
 ## Automation Scripts

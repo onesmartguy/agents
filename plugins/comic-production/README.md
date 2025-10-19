@@ -464,11 +464,15 @@ episode-manager: [Reports: 15/40 panels complete, 37.5% done, estimated 2 hours 
 
 **Activated when**: Orchestrating production workflows
 
-**8 MCP Tools**:
-- create_episode, update_episode
-- create_character, update_character
-- create_shotlist, generate_panel
-- assemble_episode, render_video
+**28 MCP Tools** organized by category:
+- Story (5): create_beat_sheet, draft_script, build_shotlist, validate_story, export_story
+- Character (8): create_character_from_photo, list_characters, add_character_pose/expression/prop, add_prop_state/animation, generate_character_overview
+- Environment (5): create_environment_from_photo, list_environments, add_environment_setting/prop, generate_environment_overview
+- Image Generation (3): render_panel, list_providers, get_provider_info
+- Production (3): render_segment, render_speech_bubble, render_comic_effect
+- Assembly (2): compose_beats, assemble_page
+- Orchestration (1): direct_story
+- Style (1): get_style_presets
 
 ### character-card-design
 **Character database and specifications**
@@ -551,30 +555,32 @@ episodes/<episode-slug>/
 **Next steps**: Edit beat_sheet.md and script.md
 
 ### /comic-production:character-create
-**Create character with card and directories**
+**Create character from photo analysis using AI vision**
 
 ```bash
 /comic-production:character-create <character-slug> [options]
 
 Options:
+  --photos <string>       Comma-separated photo paths
   --name <string>         Character display name
-  --description <string>  Base prompt description
-  --age <string>          Age or age range
+  --prompt <string>       Analysis prompt for AI vision
   --role <string>         Character role
 ```
+
+**Uses MCP tool**: `create_character_from_photo` - Analyzes photos with AI vision to extract appearance details
 
 **Creates**:
 ```
 characters/<character-slug>/
-├── card.json
-├── refs/ (for reference images)
-└── lora/ (for LoRA models)
+├── references/
+│   └── <character>.json (AI-generated from photos)
+└── (photos stored for reference)
 ```
 
-**Next steps**: Add reference images, train LoRA
+**Next steps**: Review generated appearance, add poses/expressions with `add_character_pose/expression`
 
 ### /comic-production:story-develop
-**Convert beat sheet to shotlist**
+**Transform beat sheet and script into production-ready shotlist**
 
 ```bash
 /comic-production:story-develop [episode-slug] [options]
@@ -585,32 +591,45 @@ Options:
   --format <string>     Output format (default: from metadata)
 ```
 
-**Outputs**: shotlist.json with camera angles, segments, timing
+**Uses MCP tools**:
+- `create_beat_sheet` - Generate structured beat sheet from premise
+- `draft_script` - Create script with character-appropriate dialogue
+- `build_shotlist` - Build shot-by-shot breakdown with camera specs
+- `validate_story` - Validate story structure and pacing
+- `export_story` - Export for review (PDF/Markdown)
+
+**Outputs**: beat_sheet.md, script.md, shotlist.json with camera angles, segments, timing
 
 **Next steps**: Review shotlist, run panels-generate
 
 ### /comic-production:panels-generate
-**Generate panels via ComfyUI**
+**Generate panels using multi-provider image generation (Gemini, Replicate FLUX, ComfyUI)**
 
 ```bash
 /comic-production:panels-generate [episode-slug] [options]
 
 Options:
-  --shots <string>      Specific shot IDs (comma-separated)
-  --batch-size <number> Parallel generation (default: 5)
-  --quality <string>    draft|standard|high (default: standard)
-  --status              Show progress only
+  --shots <string>    Specific shot IDs (comma-separated)
+  --provider <string> auto|gemini|consistent|flux|local (default: auto)
+  --quality <string>  Style preset (default: em-e-comics)
 ```
 
-**Quality presets**:
-- **draft**: 15 steps, 512x768 upscaled (fast preview)
-- **standard**: 25 steps, 1024x1536 (production)
-- **high**: 35 steps, 1024x1536 with refinement (final)
+**Uses MCP tools**:
+- `render_panel` - Multi-provider panel generation with auto fallback
+- `list_providers` - Check available providers and costs
+- `get_provider_info` - Get provider details
+- `get_style_presets` - 11 available style presets
+
+**Provider costs**:
+- **Gemini 2.5 Flash**: $0.002/image (4-6s) - Best for rapid iteration
+- **Replicate Consistent Character**: $0.01/image (10-15s) - Best for character shots
+- **Replicate FLUX**: $0.03/image (15-20s) - Best for hero shots
+- **Local ComfyUI**: Free (GPU-dependent) - Full control
 
 **Next steps**: Review segments, assemble video/pages
 
 ### /comic-production:video-assemble
-**Assemble vertical video with Remotion**
+**Assemble vertical video using Remotion beat composition**
 
 ```bash
 /comic-production:video-assemble [episode-slug] [options]
@@ -619,15 +638,20 @@ Options:
   --quality <number>    Output quality 0-100 (default: 80)
   --fps <number>        Frames per second (default: 30)
   --output <path>       Custom output path
-  --preview             Generate preview (faster, lower quality)
+  --format <string>     mp4|webm (default: mp4)
 ```
 
-**Output**: 1080x1920 MP4 optimized for social media
+**Uses MCP tools**:
+- `compose_beats` - Compose rendered segments into video (Remotion)
+- `render_speech_bubble` - Add speech bubbles with animations
+- `render_comic_effect` - Add comic visual effects
+
+**Output**: 1080x1920 MP4/WebM optimized for TikTok, Instagram Reels, YouTube Shorts
 
 **Next steps**: Review video, distribute to platforms
 
 ### /comic-production:page-assemble
-**Assemble print pages with Canvas**
+**Assemble print pages using Canvas rendering**
 
 ```bash
 /comic-production:page-assemble [episode-slug] [options]
@@ -638,12 +662,14 @@ Options:
   --output <path>       Custom output path
 ```
 
-**Output**: 6.875" x 10.5" @ 300 DPI PDF/PNG
+**Uses MCP tool**: `assemble_page` - Assemble segments into print pages (Canvas/PDF)
+
+**Output**: 6.875" x 10.5" @ 300 DPI PDF/PNG with proper bleed and safe zones
 
 **Next steps**: Review pages, send to print or distribute
 
 ### /comic-production:mcp-setup
-**Configure MCP server**
+**Configure MCP server with all 28 comic production tools**
 
 ```bash
 /comic-production:mcp-setup [options]
@@ -651,11 +677,352 @@ Options:
 Options:
   --install   Install MCP server dependencies
   --config    Configure MCP server settings
-  --test      Test MCP server connection
+  --test      Test all 28 MCP tools
   --status    Check MCP server status
 ```
 
-**Sets up**: Em & E Comics MCP server for workflow orchestration
+**Sets up**: Em & E Comics MCP server with 28 tools for complete workflow automation
+
+**All 28 Tools**: Story development (5), Character tools (8), Environment tools (5), Image generation (3), Production tools (3), Assembly (2), Orchestration (1), Style (1)
+
+## MCP Tools Complete Reference
+
+All 28 actual tools from the mcp-em-e-comics server, organized by category.
+
+### Story Development Tools (5)
+
+**create_beat_sheet**
+```javascript
+await mcp__em_e_comics__create_beat_sheet({
+  episodeId: string,
+  premise: string,
+  targetDuration: number,  // seconds
+  genre: string,
+  characters: string[]
+})
+```
+Generates structured 3-act beat sheet from premise with 10 beats.
+
+**draft_script**
+```javascript
+await mcp__em_e_comics__draft_script({
+  episodeId: string,
+  beatSheetPath: string,
+  characterVoices: object  // { "em": "curious, enthusiastic", "e": "patient, technical" }
+})
+```
+Creates script with character-appropriate dialogue from beat sheet.
+
+**build_shotlist**
+```javascript
+await mcp__em_e_comics__build_shotlist({
+  episodeId: string,
+  scriptPath: string,
+  targetFormat: "vertical-video" | "print" | "both",
+  avgShotDuration: number  // seconds per shot for video
+})
+```
+Builds shot-by-shot breakdown with camera angles and compositions.
+
+**validate_story**
+```javascript
+await mcp__em_e_comics__validate_story({
+  episodeId: string
+})
+```
+Validates story structure, pacing, and character arcs.
+
+**export_story**
+```javascript
+await mcp__em_e_comics__export_story({
+  episodeId: string,
+  format: "pdf" | "docx" | "markdown",
+  includeNotes: boolean
+})
+```
+Exports story content for review or distribution.
+
+### Character Tools (8)
+
+**create_character_from_photo**
+```javascript
+await mcp__em_e_comics__create_character_from_photo({
+  characterName: string,
+  photoPath: string[],  // Multiple angles recommended
+  analysisPrompt: string,  // Focus areas for AI vision
+  updateExisting: boolean  // false = replace, true = merge
+})
+```
+Analyzes photos using AI vision to extract appearance details automatically. This is the primary way to create characters in the system.
+
+**list_characters**
+```javascript
+const characters = await mcp__em_e_comics__list_characters()
+```
+Returns list of all created characters with their metadata.
+
+**add_character_pose**
+```javascript
+await mcp__em_e_comics__add_character_pose({
+  characterName: string,
+  poseName: string,
+  poseDescription: string,
+  referenceImage: string  // optional
+})
+```
+Adds pose variation to character (e.g., "confident", "thinking", "running").
+
+**add_character_expression**
+```javascript
+await mcp__em_e_comics__add_character_expression({
+  characterName: string,
+  expressionName: string,
+  expressionDescription: string,
+  referenceImage: string  // optional
+})
+```
+Adds facial expression (e.g., "happy", "frustrated", "surprised").
+
+**add_character_prop**
+```javascript
+await mcp__em_e_comics__add_character_prop({
+  characterName: string,
+  propName: string,
+  propDescription: string,
+  defaultState: string,
+  interactions: string[]
+})
+```
+Adds prop associated with character (e.g., laptop, skateboard, coffee mug).
+
+**add_prop_state**
+```javascript
+await mcp__em_e_comics__add_prop_state({
+  characterName: string,
+  propName: string,
+  stateName: string,
+  stateDescription: string
+})
+```
+Adds state variation to prop (e.g., laptop "open", "closed", "broken").
+
+**add_prop_animation**
+```javascript
+await mcp__em_e_comics__add_prop_animation({
+  characterName: string,
+  propName: string,
+  animationName: string,
+  frames: string[],
+  duration: number
+})
+```
+Adds animation sequence to prop for video format.
+
+**generate_character_overview**
+```javascript
+await mcp__em_e_comics__generate_character_overview({
+  characterName: string
+})
+```
+Generates comprehensive character documentation (appearance, poses, expressions, props).
+
+### Environment Tools (5)
+
+**create_environment_from_photo**
+```javascript
+await mcp__em_e_comics__create_environment_from_photo({
+  environmentName: string,
+  photoPath: string[],
+  analysisPrompt: string,
+  updateExisting: boolean
+})
+```
+Creates environment from photo analysis (AI vision extracts details).
+
+**list_environments**
+```javascript
+const environments = await mcp__em_e_comics__list_environments()
+```
+Returns list of all created environments.
+
+**add_environment_setting**
+```javascript
+await mcp__em_e_comics__add_environment_setting({
+  environmentName: string,
+  settingName: string,
+  settingDescription: string
+})
+```
+Adds environment variation (e.g., time of day, weather, lighting).
+
+**add_environment_prop**
+```javascript
+await mcp__em_e_comics__add_environment_prop({
+  environmentName: string,
+  propName: string,
+  propDescription: string,
+  defaultState: string,
+  interactions: string[]
+})
+```
+Adds prop to environment (furniture, decorations, interactive objects).
+
+**generate_environment_overview**
+```javascript
+await mcp__em_e_comics__generate_environment_overview({
+  environmentName: string
+})
+```
+Generates comprehensive environment documentation.
+
+### Image Generation Tools (3)
+
+**render_panel**
+```javascript
+await mcp__em_e_comics__render_panel({
+  episodeId: string,
+  shotId: string,
+  // Structured approach (recommended):
+  characters: string[],
+  env: string,
+  camera: string,
+  style: string,  // Style preset name
+  characterAppearances: object[],  // Optional overrides
+  // OR raw prompt approach:
+  prompt: string,
+  negativePrompt: string,
+  referenceImage: string,
+  // Common:
+  width: number,
+  height: number,
+  provider: "auto" | "gemini" | "consistent" | "flux" | "local",
+  outputPath: string
+})
+```
+Renders comic panel using multi-provider system with automatic fallback. Auto provider tries: Gemini → Consistent → FLUX → Local ComfyUI.
+
+**list_providers**
+```javascript
+const providers = await mcp__em_e_comics__list_providers()
+// Returns: [
+//   { name: "gemini-2.5-flash", available: true, cost: "$0.002/image", speed: "4-6s" },
+//   { name: "replicate-consistent-character", available: true, cost: "$0.01/image" },
+//   { name: "replicate-flux", available: true, cost: "$0.03/image" },
+//   { name: "comfyui-local", available: false }
+// ]
+```
+Lists available image generation providers with costs and status.
+
+**get_provider_info**
+```javascript
+await mcp__em_e_comics__get_provider_info({
+  provider: "gemini" | "consistent" | "flux" | "local"
+})
+```
+Gets detailed information about specific provider.
+
+### Production Tools (3)
+
+**render_segment**
+```javascript
+await mcp__em_e_comics__render_segment({
+  episodeId: string,
+  shotId: string,
+  segmentType: "character-panel" | "speech-bubble" | "comic-effect" | "border",
+  segmentData: object  // Type-specific data
+})
+```
+Renders production segment (panels, bubbles, effects, borders).
+
+**render_speech_bubble**
+```javascript
+await mcp__em_e_comics__render_speech_bubble({
+  episodeId: string,
+  shotId: string,
+  character: string,
+  text: string,
+  bubbleType: "speech" | "thought" | "shout" | "whisper",
+  position: { x: number, y: number },  // Normalized 0-1
+  tailDirection: string  // "bottom-left", "top-right", etc.
+})
+```
+Renders speech bubble with text and animations.
+
+**render_comic_effect**
+```javascript
+await mcp__em_e_comics__render_comic_effect({
+  episodeId: string,
+  shotId: string,
+  effectType: "impact" | "speed-lines" | "emphasis" | "action",
+  position: { x: number, y: number },
+  intensity: number  // 0-1
+})
+```
+Renders comic visual effect (impact stars, motion lines, etc.).
+
+### Assembly Tools (2)
+
+**compose_beats**
+```javascript
+await mcp__em_e_comics__compose_beats({
+  episodeId: string,
+  outputPath: string,
+  fps: number,
+  quality: number,
+  format: "mp4" | "webm",
+  includeAudio: boolean
+})
+```
+Composes rendered segments into video using Remotion. Creates 1080x1920 vertical video optimized for social media.
+
+**assemble_page**
+```javascript
+await mcp__em_e_comics__assemble_page({
+  episodeId: string,
+  pageNumber: number,
+  layout: "standard" | "action" | "conversation",
+  format: "pdf" | "png" | "both",
+  outputPath: string,
+  pageSize: { width: number, height: number, dpi: number }
+})
+```
+Assembles segments into print pages using Canvas. Default: 6.875" x 10.5" @ 300 DPI.
+
+### Orchestration Tools (1)
+
+**direct_story**
+```javascript
+await mcp__em_e_comics__direct_story({
+  episodeId: string,
+  premise: string,
+  characters: string[],
+  targetDuration: number,
+  outputFormat: "vertical-video" | "print" | "both",
+  autoGenerate: boolean,
+  maxPanelsPerDay: number
+})
+```
+High-level workflow automation. Orchestrates complete pipeline: beat sheet → script → shotlist → generation → assembly.
+
+### Style Tools (1)
+
+**get_style_presets**
+```javascript
+const styles = await mcp__em_e_comics__get_style_presets()
+// Returns 11 presets:
+// - em-e-comics (default, clean modern)
+// - comic-book-classic (traditional American)
+// - manga-style (Japanese influence)
+// - graphic-novel (sophisticated illustration)
+// - newspaper-strip (daily strip style)
+// - webcomic-modern (digital webcomic)
+// - action-dynamic (high-energy action)
+// - slice-of-life-calm (gentle everyday)
+// - horror-dark (atmospheric horror)
+// - sci-fi-neon (cyberpunk/futuristic)
+// - fantasy-painterly (painterly fantasy)
+```
+Gets available visual style presets for panel generation.
 
 ## Best Practices
 
