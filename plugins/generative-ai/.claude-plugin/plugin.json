@@ -1,0 +1,54 @@
+{
+  "name": "generative-ai-prompt-engineering",
+  "version": "1.0.0",
+  "description": "Expert agents and tools for AI image generation across Midjourney, ComfyUI, Gemini, and Firefly with 50+ comic art styles, cross-platform conversion, and production-ready workflows",
+  "author": {
+    "name": "Em & E Comics",
+    "email": "eddie.flores@example.com"
+  },
+  "homepage": "https://github.com/em-e-comics/generative-ai-prompt-engineering",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/em-e-comics/generative-ai-prompt-engineering.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "ai",
+    "image-generation",
+    "midjourney",
+    "comfyui",
+    "gemini",
+    "firefly",
+    "comic-art",
+    "prompt-engineering",
+    "style-library",
+    "cross-platform",
+    "illustration",
+    "concept-art"
+  ],
+  "categories": [
+    "AI/ML",
+    "Creative Tools",
+    "Prompt Engineering",
+    "Image Generation"
+  ],
+  "capabilities": {
+    "agents": 5,
+    "commands": 5,
+    "skills": 2,
+    "styles": "50+",
+    "platforms": ["Midjourney", "ComfyUI", "Gemini Imagen 3", "Adobe Firefly"]
+  },
+  "requirements": {
+    "claude": "3.5+",
+    "internet": false
+  },
+  "tags": [
+    "production-ready",
+    "comic-books",
+    "manga",
+    "illustration",
+    "stylization",
+    "character-design"
+  ]
+}

@@ -79,13 +79,10 @@ await mcp__comic_strip_studio__add_character_prop({
 const characters = await mcp__comic_strip_studio__list_characters()
 ```
 
-## Created Structure
+## Firestore Path
 
 ```
-characters/em/
-├── references/
-│   └── em.json (AI-generated from photos)
-└── (photos stored for future reference)
+characters/[character-slug]
 ```
 
 ## Next Steps

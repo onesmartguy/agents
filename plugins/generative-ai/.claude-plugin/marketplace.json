@@ -1,0 +1,69 @@
+{
+  "title": "Generative AI Prompt Engineering",
+  "tagline": "Expert prompt engineering for Midjourney, ComfyUI, Gemini, and Firefly",
+  "description": "A comprehensive plugin providing expert agents for generative AI prompting across 4 major platforms. Features 50+ comic art styles, cross-platform conversion, production-ready workflows, and instant prompt generation for any art style and description.",
+  "image": "https://via.placeholder.com/600x400?text=Generative+AI+Prompt+Engineering",
+  "screenshots": [
+    {
+      "title": "Platform Expert Agents",
+      "description": "Specialized agents for each platform with deep knowledge of platform-specific syntax and capabilities"
+    },
+    {
+      "title": "50+ Comic Art Styles",
+      "description": "Comprehensive style library covering Manga, Western Comics, European Comics, and more"
+    },
+    {
+      "title": "Cross-Platform Conversion",
+      "description": "Convert prompts between all 4 platforms with automatic syntax transformation"
+    },
+    {
+      "title": "Production-Ready Output",
+      "description": "Generate complete, ready-to-use prompts with all parameters and recommendations"
+    }
+  ],
+  "features": [
+    "5 Expert Agents (Midjourney, ComfyUI, Gemini, Firefly, Converter)",
+    "50+ Comic Art Styles per Platform",
+    "Cross-Platform Prompt Conversion",
+    "Production-Ready Prompt Generation",
+    "Style Library with Examples",
+    "Parameter Recommendations",
+    "Quality Enhancement Keywords",
+    "Character Consistency Guidance"
+  ],
+  "platforms": [
+    "Midjourney v7, Niji 7",
+    "ComfyUI (SDXL, FLUX)",
+    "Google Gemini Imagen 3",
+    "Adobe Firefly"
+  ],
+  "use_cases": [
+    "Comic Book Illustration",
+    "Character Design",
+    "Concept Art",
+    "Comic Panel Generation",
+    "Style Exploration",
+    "Production Workflows",
+    "Batch Generation",
+    "Cross-Platform Testing"
+  ],
+  "audience": [
+    "AI Artists",
+    "Comic Creators",
+    "Concept Artists",
+    "Illustrators",
+    "Game Designers",
+    "Content Creators",
+    "Animation Studios",
+    "Indie Developers"
+  ],
+  "metrics": {
+    "styles": "50+",
+    "platforms": 4,
+    "agents": 5,
+    "commands": 5,
+    "skills": 2
+  },
+  "updated": "2025-01-15",
+  "version": "1.0.0"
+}
