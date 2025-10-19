@@ -101,8 +101,8 @@
     {
       "name": "backend-development",
       "source": "./plugins/backend-development",
-      "description": "Backend API design, GraphQL architecture, and test-driven backend development",
-      "version": "1.2.2",
+      "description": "Backend API design, GraphQL architecture, Firebase backend integration, and test-driven backend development",
+      "version": "1.2.3",
       "author": {
         "name": "Seth Hobson",
         "url": "https://github.com/wshobson"
@@ -115,7 +115,8 @@
         "api-design",
         "graphql",
         "tdd",
-        "architecture"
+        "architecture",
+        "firebase"
       ],
       "category": "development",
       "strict": false,
@@ -130,6 +131,8 @@
       "skills": [
         "./skills/api-design-principles",
         "./skills/architecture-patterns",
+        "./skills/firebase-backend-integration",
+        "./skills/firebase-storage-cdn",
         "./skills/microservices-patterns"
       ]
     },
@@ -196,8 +199,8 @@
     {
       "name": "unit-testing",
       "source": "./plugins/unit-testing",
-      "description": "Unit and integration test automation for Python and JavaScript with debugging support",
-      "version": "1.2.0",
+      "description": "Unit and integration test automation for Python, JavaScript, and .NET with debugging support, xUnit, NUnit, Moq, and FluentAssertions",
+      "version": "1.2.1",
       "author": {
         "name": "Seth Hobson",
         "url": "https://github.com/wshobson"
@@ -210,6 +213,9 @@
         "unit-tests",
         "python",
         "javascript",
+        "dotnet",
+        "csharp",
+        "xunit",
         "automation"
       ],
       "category": "testing",
@@ -220,6 +226,9 @@
       "agents": [
         "./agents/test-automator.md",
         "./agents/debugger.md"
+      ],
+      "skills": [
+        "./skills/dotnet-testing-patterns"
       ]
     },
     {
@@ -341,8 +350,8 @@
     {
       "name": "error-debugging",
       "source": "./plugins/error-debugging",
-      "description": "Error analysis, trace debugging, and multi-agent problem diagnosis",
-      "version": "1.2.0",
+      "description": "Error analysis, trace debugging, .NET diagnostics with dotnet-dump/trace/counters, and multi-agent problem diagnosis",
+      "version": "1.2.1",
       "author": {
         "name": "Seth Hobson",
         "url": "https://github.com/wshobson"
@@ -354,7 +363,9 @@
         "error-handling",
         "debugging",
         "diagnostics",
-        "troubleshooting"
+        "troubleshooting",
+        "dotnet",
+        "profiling"
       ],
       "category": "utilities",
       "strict": false,
@@ -362,6 +373,9 @@
         "./commands/error-analysis.md",
         "./commands/error-trace.md",
         "./commands/multi-agent-review.md"
+      ],
+      "skills": [
+        "./skills/dotnet-debugging-diagnostics"
       ],
       "agents": [
         "./agents/debugger.md",
@@ -811,8 +825,8 @@
     {
       "name": "cicd-automation",
       "source": "./plugins/cicd-automation",
-      "description": "CI/CD pipeline configuration, GitHub Actions/GitLab CI workflow setup, and automated deployment pipeline orchestration",
-      "version": "1.2.1",
+      "description": "CI/CD pipeline configuration for .NET/Node.js/Python, GitHub Actions/GitLab CI/Azure DevOps workflow setup, Docker builds, and automated deployment pipeline orchestration",
+      "version": "1.2.2",
       "author": {
         "name": "Seth Hobson",
         "url": "https://github.com/wshobson"
@@ -825,7 +839,9 @@
         "automation",
         "pipeline",
         "github-actions",
-        "gitlab-ci"
+        "gitlab-ci",
+        "dotnet",
+        "azure-devops"
       ],
       "category": "infrastructure",
       "strict": false,
@@ -841,6 +857,7 @@
       ],
       "skills": [
         "./skills/deployment-pipeline-design",
+        "./skills/dotnet-cicd-patterns",
         "./skills/github-actions-templates",
         "./skills/gitlab-ci-patterns",
         "./skills/secrets-management"
@@ -849,8 +866,8 @@
     {
       "name": "application-performance",
       "source": "./plugins/application-performance",
-      "description": "Application profiling, performance optimization, and observability for frontend and backend systems",
-      "version": "1.2.1",
+      "description": "Application profiling, performance optimization with BenchmarkDotNet, async/await patterns, and observability for frontend and backend systems",
+      "version": "1.2.2",
       "author": {
         "name": "Seth Hobson",
         "url": "https://github.com/wshobson"
@@ -862,12 +879,17 @@
         "performance",
         "profiling",
         "optimization",
-        "core-web-vitals"
+        "core-web-vitals",
+        "dotnet",
+        "benchmarking"
       ],
       "category": "performance",
       "strict": false,
       "commands": [
         "./commands/performance-optimization.md"
+      ],
+      "skills": [
+        "./skills/dotnet-performance-optimization"
       ],
       "agents": [
         "./agents/performance-engineer.md",
@@ -1060,8 +1082,8 @@
     {
       "name": "database-migrations",
       "source": "./plugins/database-migrations",
-      "description": "Database migration automation, observability, and cross-database migration strategies",
-      "version": "1.2.0",
+      "description": "Database migration automation with Entity Framework Core, Alembic, Flyway, observability, and cross-database migration strategies",
+      "version": "1.2.1",
       "author": {
         "name": "Seth Hobson",
         "url": "https://github.com/wshobson"
@@ -1074,13 +1096,18 @@
         "database-operations",
         "postgres",
         "mysql",
-        "mongodb"
+        "mongodb",
+        "entity-framework",
+        "dotnet"
       ],
       "category": "database",
       "strict": false,
       "commands": [
         "./commands/sql-migrations.md",
         "./commands/migration-observability.md"
+      ],
+      "skills": [
+        "./skills/dotnet-ef-migrations"
       ],
       "agents": [
         "./agents/database-optimizer.md",
@@ -1235,8 +1262,8 @@
     {
       "name": "api-scaffolding",
       "source": "./plugins/api-scaffolding",
-      "description": "REST and GraphQL API scaffolding, framework selection, backend architecture, and API generation",
-      "version": "1.2.1",
+      "description": "REST and GraphQL API scaffolding, Firebase Cloud Functions, framework selection, backend architecture, and API generation",
+      "version": "1.2.3",
       "author": {
         "name": "Seth Hobson",
         "url": "https://github.com/wshobson"
@@ -1250,7 +1277,12 @@
         "graphql",
         "fastapi",
         "django",
-        "express"
+        "express",
+        "firebase",
+        "serverless",
+        "dotnet",
+        "csharp",
+        "minimal-api"
       ],
       "category": "api",
       "strict": false,
@@ -1262,7 +1294,9 @@
         "./agents/django-pro.md"
       ],
       "skills": [
-        "./skills/fastapi-templates"
+        "./skills/dotnet-minimal-api-templates",
+        "./skills/fastapi-templates",
+        "./skills/firebase-functions-templates"
       ]
     },
     {
@@ -1617,8 +1651,8 @@
     {
       "name": "payment-processing",
       "source": "./plugins/payment-processing",
-      "description": "Payment gateway integration with Stripe, PayPal, checkout flow implementation, subscription billing, and PCI compliance",
-      "version": "1.2.1",
+      "description": "Payment gateway integration with Stripe, PayPal, RainforestPay, checkout flow implementation, subscription billing, and PCI compliance",
+      "version": "1.2.2",
       "author": {
         "name": "Seth Hobson",
         "url": "https://github.com/wshobson"
@@ -1630,10 +1664,12 @@
         "payments",
         "stripe",
         "paypal",
+        "rainforest",
         "checkout",
         "billing",
         "subscriptions",
-        "pci"
+        "pci",
+        "embedded-payments"
       ],
       "category": "payments",
       "strict": false,
@@ -1645,6 +1681,7 @@
         "./skills/billing-automation",
         "./skills/paypal-integration",
         "./skills/pci-compliance",
+        "./skills/rainforest-integration",
         "./skills/stripe-integration"
       ]
     },
@@ -1950,6 +1987,446 @@
         "./skills/bash-defensive-patterns/SKILL.md",
         "./skills/shellcheck-configuration/SKILL.md",
         "./skills/bats-testing-patterns/SKILL.md"
+      ]
+    },
+    {
+      "name": "dotnet-development",
+      "source": "./plugins/dotnet-development",
+      "description": "Modern .NET 8+ and legacy .NET Framework 4.8 development with CQRS, DDD, clean architecture, ASP.NET Core, ASP.NET MVC, and Entity Framework",
+      "version": "1.2.2",
+      "author": {
+        "name": "Seth Hobson",
+        "url": "https://github.com/wshobson"
+      },
+      "homepage": "https://github.com/wshobson/agents",
+      "repository": "https://github.com/wshobson/agents",
+      "license": "MIT",
+      "keywords": [
+        "dotnet",
+        "csharp",
+        "aspnet-core",
+        "aspnet-mvc",
+        "cqrs",
+        "domain-driven-design",
+        "entity-framework",
+        "essential"
+      ],
+      "category": "languages",
+      "strict": false,
+      "commands": [
+        "./commands/dotnet-scaffold.md"
+      ],
+      "agents": [
+        "./agents/dotnet-pro.md",
+        "./agents/aspnet-core-pro.md",
+        "./agents/ef-core-pro.md"
+      ],
+      "skills": [
+        "./skills/cqrs-patterns",
+        "./skills/domain-driven-design",
+        "./skills/async-csharp-patterns",
+        "./skills/entity-framework-core-optimization",
+        "./skills/dotnet-testing-strategies",
+        "./skills/clean-architecture-dotnet",
+        "./skills/aspnet-mvc-5-patterns",
+        "./skills/entity-framework-6-optimization",
+        "./skills/legacy-dotnet-modernization",
+        "./skills/windows-authentication-patterns"
+      ]
+    },
+    {
+      "name": "react-development",
+      "source": "./plugins/react-development",
+      "description": "Modern React 18+ development with hooks, performance optimization, state management, Firebase integration, and testing",
+      "version": "1.2.3",
+      "author": {
+        "name": "Seth Hobson",
+        "url": "https://github.com/wshobson"
+      },
+      "homepage": "https://github.com/wshobson/agents",
+      "repository": "https://github.com/wshobson/agents",
+      "license": "MIT",
+      "keywords": [
+        "react",
+        "hooks",
+        "components",
+        "state-management",
+        "firebase",
+        "essential"
+      ],
+      "category": "languages",
+      "strict": false,
+      "commands": [
+        "./commands/react-scaffold.md"
+      ],
+      "agents": [
+        "./agents/react-pro.md",
+        "./agents/react-query-pro.md",
+        "./agents/react-testing-pro.md"
+      ],
+      "skills": [
+        "./skills/firebase-integration",
+        "./skills/react-hooks-mastery",
+        "./skills/react-performance-optimization",
+        "./skills/react-state-management",
+        "./skills/react-component-patterns",
+        "./skills/react-testing-patterns"
+      ]
+    },
+    {
+      "name": "nextjs-development",
+      "source": "./plugins/nextjs-development",
+      "description": "Next.js 14+ development with App Router, React Server Components, SSR/SSG, Firebase integration, and full-stack patterns",
+      "version": "1.2.3",
+      "author": {
+        "name": "Seth Hobson",
+        "url": "https://github.com/wshobson"
+      },
+      "homepage": "https://github.com/wshobson/agents",
+      "repository": "https://github.com/wshobson/agents",
+      "license": "MIT",
+      "keywords": [
+        "nextjs",
+        "app-router",
+        "rsc",
+        "ssr",
+        "ssg",
+        "firebase",
+        "essential"
+      ],
+      "category": "languages",
+      "strict": false,
+      "commands": [
+        "./commands/nextjs-scaffold.md"
+      ],
+      "agents": [
+        "./agents/nextjs-pro.md",
+        "./agents/nextjs-api-pro.md",
+        "./agents/nextjs-deployment-pro.md"
+      ],
+      "skills": [
+        "./skills/app-router-patterns",
+        "./skills/firebase-nextjs-integration",
+        "./skills/nextjs-api-routes",
+        "./skills/nextjs-data-fetching",
+        "./skills/nextjs-optimization",
+        "./skills/server-components"
+      ]
+    },
+    {
+      "name": "react-native-development",
+      "source": "./plugins/react-native-development",
+      "description": "React Native 0.74+ with modern architecture, Firebase integration, state management, and native integrations",
+      "version": "1.2.3",
+      "author": {
+        "name": "Seth Hobson",
+        "url": "https://github.com/wshobson"
+      },
+      "homepage": "https://github.com/wshobson/agents",
+      "repository": "https://github.com/wshobson/agents",
+      "license": "MIT",
+      "keywords": [
+        "react-native",
+        "mobile",
+        "ios",
+        "android",
+        "cross-platform",
+        "firebase"
+      ],
+      "category": "languages",
+      "strict": false,
+      "commands": [
+        "./commands/react-native-scaffold.md"
+      ],
+      "agents": [
+        "./agents/react-native-pro.md",
+        "./agents/react-native-ui-pro.md",
+        "./agents/react-native-native-modules-pro.md"
+      ],
+      "skills": [
+        "./skills/firebase-react-native-integration",
+        "./skills/react-native-animations",
+        "./skills/react-native-navigation",
+        "./skills/react-native-performance",
+        "./skills/react-native-platform-specific",
+        "./skills/react-native-state-management"
+      ]
+    },
+    {
+      "name": "react-native-expo",
+      "source": "./plugins/react-native-expo",
+      "description": "Expo SDK 51+ workflows, EAS Build, OTA updates, and managed/bare workflow patterns",
+      "version": "1.2.2",
+      "author": {
+        "name": "Seth Hobson",
+        "url": "https://github.com/wshobson"
+      },
+      "homepage": "https://github.com/wshobson/agents",
+      "repository": "https://github.com/wshobson/agents",
+      "license": "MIT",
+      "keywords": [
+        "expo",
+        "react-native",
+        "eas-build",
+        "mobile",
+        "expo-router"
+      ],
+      "category": "languages",
+      "strict": false,
+      "commands": [
+        "./commands/expo-scaffold.md"
+      ],
+      "agents": [
+        "./agents/expo-pro.md",
+        "./agents/expo-router-pro.md",
+        "./agents/eas-build-pro.md"
+      ],
+      "skills": [
+        "./skills/expo-managed-workflow",
+        "./skills/expo-router-v3",
+        "./skills/eas-build-configuration",
+        "./skills/expo-modules",
+        "./skills/expo-ota-updates"
+      ]
+    },
+    {
+      "name": "tailwind-styling",
+      "source": "./plugins/tailwind-styling",
+      "description": "Tailwind CSS with CVA, design systems, and modern styling patterns for scalable applications",
+      "version": "1.2.2",
+      "author": {
+        "name": "Seth Hobson",
+        "url": "https://github.com/wshobson"
+      },
+      "homepage": "https://github.com/wshobson/agents",
+      "repository": "https://github.com/wshobson/agents",
+      "license": "MIT",
+      "keywords": [
+        "tailwind",
+        "css",
+        "styling",
+        "design-system",
+        "cva"
+      ],
+      "category": "development",
+      "strict": false,
+      "commands": [
+        "./commands/tailwind-setup.md"
+      ],
+      "agents": [
+        "./agents/tailwind-pro.md",
+        "./agents/design-system-pro.md"
+      ],
+      "skills": [
+        "./skills/tailwind-configuration",
+        "./skills/cva-variant-patterns",
+        "./skills/design-tokens",
+        "./skills/responsive-design-patterns"
+      ]
+    },
+    {
+      "name": "playwright-development",
+      "source": "./plugins/playwright-development",
+      "description": "End-to-end testing with Playwright, modern test automation, and CI/CD integration",
+      "version": "1.2.2",
+      "author": {
+        "name": "Seth Hobson",
+        "url": "https://github.com/wshobson"
+      },
+      "homepage": "https://github.com/wshobson/agents",
+      "repository": "https://github.com/wshobson/agents",
+      "license": "MIT",
+      "keywords": [
+        "playwright",
+        "e2e",
+        "testing",
+        "automation",
+        "ci-cd"
+      ],
+      "category": "testing",
+      "strict": false,
+      "commands": [
+        "./commands/playwright-scaffold.md"
+      ],
+      "agents": [
+        "./agents/playwright-pro.md",
+        "./agents/playwright-ci-pro.md"
+      ],
+      "skills": [
+        "./skills/playwright-patterns",
+        "./skills/page-object-model",
+        "./skills/playwright-ci-integration",
+        "./skills/visual-regression-testing"
+      ]
+    },
+    {
+      "name": "react-animations",
+      "source": "./plugins/react-animations",
+      "description": "Framer Motion animation patterns, performance optimization, and React animation architecture",
+      "version": "1.2.3",
+      "author": {
+        "name": "Seth Hobson",
+        "url": "https://github.com/wshobson"
+      },
+      "homepage": "https://github.com/wshobson/agents",
+      "repository": "https://github.com/wshobson/agents",
+      "license": "MIT",
+      "keywords": [
+        "framer-motion",
+        "motion",
+        "animation",
+        "react",
+        "performance",
+        "ui"
+      ],
+      "category": "development",
+      "strict": false,
+      "commands": [
+        "./commands/animation-scaffold.md"
+      ],
+      "agents": [
+        "./agents/framer-motion-pro.md",
+        "./agents/react-animation-architect.md"
+      ],
+      "skills": [
+        "./skills/motion-variants-patterns",
+        "./skills/animation-performance-optimization",
+        "./skills/motion-orchestration",
+        "./skills/layout-animations"
+      ]
+    },
+    {
+      "name": "video-production",
+      "source": "./plugins/video-production",
+      "description": "Programmatic video creation with Remotion, FFmpeg automation, and cloud video pipelines",
+      "version": "1.2.3",
+      "author": {
+        "name": "Seth Hobson",
+        "url": "https://github.com/wshobson"
+      },
+      "homepage": "https://github.com/wshobson/agents",
+      "repository": "https://github.com/wshobson/agents",
+      "license": "MIT",
+      "keywords": [
+        "remotion",
+        "ffmpeg",
+        "video",
+        "automation",
+        "media-processing",
+        "content-creation"
+      ],
+      "category": "media",
+      "strict": false,
+      "commands": [
+        "./commands/video-scaffold.md",
+        "./commands/video-pipeline.md"
+      ],
+      "agents": [
+        "./agents/remotion-pro.md",
+        "./agents/ffmpeg-automator.md",
+        "./agents/video-pipeline-architect.md"
+      ],
+      "skills": [
+        "./skills/remotion-patterns",
+        "./skills/ffmpeg-automation",
+        "./skills/video-pipeline-design",
+        "./skills/serverless-video-processing"
+      ]
+    },
+    {
+      "name": "ai-voice-audio",
+      "source": "./plugins/ai-voice-audio",
+      "description": "ElevenLabs voice cloning, text-to-speech with natural expression, sound effects, and audio production workflows",
+      "version": "1.2.3",
+      "author": {
+        "name": "Seth Hobson",
+        "url": "https://github.com/wshobson"
+      },
+      "homepage": "https://github.com/wshobson/agents",
+      "repository": "https://github.com/wshobson/agents",
+      "license": "MIT",
+      "keywords": [
+        "elevenlabs",
+        "voice-cloning",
+        "text-to-speech",
+        "audio",
+        "ai-voice",
+        "sound-effects",
+        "naturalness"
+      ],
+      "category": "ai-ml",
+      "strict": false,
+      "commands": [
+        "./commands/voice-clone.md",
+        "./commands/audio-produce.md"
+      ],
+      "agents": [
+        "./agents/elevenlabs-pro.md",
+        "./agents/audio-producer.md",
+        "./agents/voice-design-specialist.md"
+      ],
+      "skills": [
+        "./skills/elevenlabs-voice-cloning",
+        "./skills/text-to-speech-optimization",
+        "./skills/audio-editing-automation",
+        "./skills/sound-effect-sourcing"
+      ]
+    },
+    {
+      "name": "comic-production",
+      "source": "./plugins/comic-production",
+      "description": "Comic episode production with story development, character consistency, ComfyUI generation, Remotion assembly, and MCP orchestration for AI-generated comics",
+      "version": "1.2.3",
+      "author": {
+        "name": "Seth Hobson",
+        "url": "https://github.com/wshobson"
+      },
+      "homepage": "https://github.com/wshobson/agents",
+      "repository": "https://github.com/wshobson/agents",
+      "license": "MIT",
+      "keywords": [
+        "comic",
+        "storytelling",
+        "comfyui",
+        "remotion",
+        "instant-id",
+        "lora",
+        "mcp",
+        "episode-production",
+        "character-design",
+        "visual-storytelling"
+      ],
+      "category": "content-creation",
+      "strict": false,
+      "commands": [
+        "./commands/episode-scaffold.md",
+        "./commands/character-create.md",
+        "./commands/story-develop.md",
+        "./commands/panels-generate.md",
+        "./commands/video-assemble.md",
+        "./commands/page-assemble.md",
+        "./commands/mcp-setup.md"
+      ],
+      "agents": [
+        "./agents/comic-director.md",
+        "./agents/character-designer.md",
+        "./agents/storyboard-artist.md",
+        "./agents/panel-generator.md",
+        "./agents/comic-assembler.md",
+        "./agents/prompt-engineer-comics.md",
+        "./agents/episode-manager.md"
+      ],
+      "skills": [
+        "./skills/comic-story-structure",
+        "./skills/character-consistency-comfyui",
+        "./skills/shotlist-design",
+        "./skills/comfyui-comic-workflows",
+        "./skills/remotion-comic-assembly",
+        "./skills/comic-page-layout",
+        "./skills/mcp-comic-orchestration",
+        "./skills/character-card-design",
+        "./skills/voice-character-matching",
+        "./skills/prop-asset-management"
       ]
     }
   ]

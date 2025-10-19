@@ -91,6 +91,51 @@ session = stripe.checkout.Session.create(
 print(session.url)
 ```
 
+#### .NET Implementation
+
+```csharp
+// Install: Stripe.net (NuGet)
+using Stripe;
+using Stripe.Checkout;
+
+StripeConfiguration.ApiKey = "sk_test_...";
+
+// Create a checkout session
+var options = new SessionCreateOptions
+{
+    PaymentMethodTypes = new List<string> { "card" },
+    LineItems = new List<SessionLineItemOptions>
+    {
+        new SessionLineItemOptions
+        {
+            PriceData = new SessionLineItemPriceDataOptions
+            {
+                Currency = "usd",
+                ProductData = new SessionLineItemPriceDataProductDataOptions
+                {
+                    Name = "Premium Subscription",
+                },
+                UnitAmount = 2000, // $20.00 in cents
+                Recurring = new SessionLineItemPriceDataRecurringOptions
+                {
+                    Interval = "month",
+                },
+            },
+            Quantity = 1,
+        },
+    },
+    Mode = "subscription",
+    SuccessUrl = "https://yourdomain.com/success?session_id={CHECKOUT_SESSION_ID}",
+    CancelUrl = "https://yourdomain.com/cancel",
+};
+
+var service = new SessionService();
+var session = await service.CreateAsync(options);
+
+// Redirect user to session.Url
+Console.WriteLine(session.Url);
+```
+
 ## Payment Implementation Patterns
 
 ### Pattern 1: One-Time Payment (Hosted Checkout)
@@ -190,6 +235,58 @@ def create_subscription(customer_id, price_id):
     except stripe.error.StripeError as e:
         print(f"Subscription creation failed: {e}")
         raise
+```
+
+#### .NET Implementation
+
+```csharp
+// ASP.NET Core Minimal API
+app.MapPost("/api/subscriptions", async (
+    CreateSubscriptionRequest request,
+    [FromServices] IConfiguration config) =>
+{
+    StripeConfiguration.ApiKey = config["Stripe:SecretKey"];
+
+    try
+    {
+        var subscriptionService = new SubscriptionService();
+        var options = new SubscriptionCreateOptions
+        {
+            Customer = request.CustomerId,
+            Items = new List<SubscriptionItemOptions>
+            {
+                new SubscriptionItemOptions
+                {
+                    Price = request.PriceId,
+                },
+            },
+            PaymentBehavior = "default_incomplete",
+            PaymentSettings = new SubscriptionPaymentSettingsOptions
+            {
+                SaveDefaultPaymentMethod = "on_subscription",
+            },
+            Expand = new List<string> { "latest_invoice.payment_intent" },
+        };
+
+        var subscription = await subscriptionService.CreateAsync(options);
+
+        return Results.Ok(new
+        {
+            SubscriptionId = subscription.Id,
+            ClientSecret = subscription.LatestInvoice.PaymentIntent.ClientSecret
+        });
+    }
+    catch (StripeException ex)
+    {
+        return Results.Problem(
+            detail: ex.Message,
+            statusCode: StatusCodes.Status400BadRequest);
+    }
+})
+.WithName("CreateSubscription")
+.WithOpenApi();
+
+public record CreateSubscriptionRequest(string CustomerId, string PriceId);
 ```
 
 ### Pattern 4: Customer Portal

@@ -150,6 +150,65 @@ async def list_users(
     )
 ```
 
+#### .NET Implementation
+
+```csharp
+// ASP.NET Core Minimal API
+using Microsoft.AspNetCore.Mvc;
+
+app.MapGet("/api/users", async (
+    [AsParameters] PaginationParams pagination,
+    [FromQuery] string? status,
+    [FromQuery] string? search,
+    IUserService userService,
+    CancellationToken ct) =>
+{
+    // Apply filters
+    var query = userService.BuildQuery(status, search);
+
+    // Count total
+    var total = await userService.CountUsersAsync(query, ct);
+
+    // Fetch page
+    var offset = (pagination.Page - 1) * pagination.PageSize;
+    var users = await userService.GetUsersAsync(
+        query,
+        pagination.PageSize,
+        offset,
+        ct);
+
+    var pages = (int)Math.Ceiling((double)total / pagination.PageSize);
+
+    return Results.Ok(new PaginatedResponse<UserDto>
+    {
+        Items = users,
+        Total = total,
+        Page = pagination.Page,
+        PageSize = pagination.PageSize,
+        Pages = pages,
+        HasNext = pagination.Page < pages,
+        HasPrev = pagination.Page > 1
+    });
+})
+.WithName("GetUsers")
+.WithOpenApi();
+
+public record PaginationParams(
+    [FromQuery] int Page = 1,
+    [FromQuery] int PageSize = 20);
+
+public record PaginatedResponse<T>
+{
+    public required IEnumerable<T> Items { get; init; }
+    public required int Total { get; init; }
+    public required int Page { get; init; }
+    public required int PageSize { get; init; }
+    public required int Pages { get; init; }
+    public required bool HasNext { get; init; }
+    public required bool HasPrev { get; init; }
+}
+```
+
 ### Pattern 3: Error Handling and Status Codes
 
 ```python
@@ -211,6 +270,122 @@ async def get_user(user_id: str):
     return user
 ```
 
+#### .NET Implementation
+
+```csharp
+// Error response models
+public record ErrorResponse(
+    string Error,
+    string Message,
+    object? Details = null,
+    DateTime Timestamp = default,
+    string Path = "");
+
+public record ValidationErrorDetail(
+    string Field,
+    string Message,
+    object? Value);
+
+// Consistent status codes
+public static class StatusCodes
+{
+    public const int Success = 200;
+    public const int Created = 201;
+    public const int NoContent = 204;
+    public const int BadRequest = 400;
+    public const int Unauthorized = 401;
+    public const int Forbidden = 403;
+    public const int NotFound = 404;
+    public const int Conflict = 409;
+    public const int Unprocessable = 422;
+    public const int InternalError = 500;
+}
+
+// Exception handling
+public class NotFoundException : Exception
+{
+    public NotFoundException(string resource, string id)
+        : base($"{resource} not found")
+    {
+        Resource = resource;
+        Id = id;
+    }
+
+    public string Resource { get; }
+    public string Id { get; }
+}
+
+// Global exception filter
+public class ExceptionHandlingMiddleware
+{
+    private readonly RequestDelegate _next;
+    private readonly ILogger<ExceptionHandlingMiddleware> _logger;
+
+    public ExceptionHandlingMiddleware(
+        RequestDelegate next,
+        ILogger<ExceptionHandlingMiddleware> logger)
+    {
+        _next = next;
+        _logger = logger;
+    }
+
+    public async Task InvokeAsync(HttpContext context)
+    {
+        try
+        {
+            await _next(context);
+        }
+        catch (NotFoundException ex)
+        {
+            _logger.LogWarning(ex, "Resource not found");
+            context.Response.StatusCode = Microsoft.AspNetCore.Http.StatusCodes.Status404NotFound;
+            await context.Response.WriteAsJsonAsync(new ErrorResponse(
+                "NotFound",
+                ex.Message,
+                new { ex.Resource, ex.Id },
+                DateTime.UtcNow,
+                context.Request.Path));
+        }
+        catch (ValidationException ex)
+        {
+            _logger.LogWarning(ex, "Validation error");
+            context.Response.StatusCode = Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest;
+            await context.Response.WriteAsJsonAsync(new ErrorResponse(
+                "ValidationError",
+                ex.Message,
+                Timestamp: DateTime.UtcNow,
+                Path: context.Request.Path));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Unhandled exception");
+            context.Response.StatusCode = Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError;
+            await context.Response.WriteAsJsonAsync(new ErrorResponse(
+                "InternalError",
+                "An error occurred processing your request",
+                Timestamp: DateTime.UtcNow,
+                Path: context.Request.Path));
+        }
+    }
+}
+
+// Example endpoint usage
+app.MapGet("/api/users/{userId:guid}", async (
+    Guid userId,
+    IUserService userService,
+    CancellationToken ct) =>
+{
+    var user = await userService.GetByIdAsync(userId, ct);
+    if (user is null)
+    {
+        throw new NotFoundException("User", userId.ToString());
+    }
+    return Results.Ok(user);
+})
+.Produces<UserDto>(Microsoft.AspNetCore.Http.StatusCodes.Status200OK)
+.Produces<ErrorResponse>(Microsoft.AspNetCore.Http.StatusCodes.Status404NotFound);
+```
+
 ### Pattern 4: HATEOAS (Hypermedia as the Engine of Application State)
 
 ```python
@@ -239,6 +414,38 @@ class UserResponse(BaseModel):
                 }
             }
         )
+```
+
+#### .NET Implementation
+
+```csharp
+// HATEOAS response with links
+public record UserResponse
+{
+    public required Guid Id { get; init; }
+    public required string Name { get; init; }
+    public required string Email { get; init; }
+    public required Dictionary<string, Link> Links { get; init; }
+
+    public static UserResponse FromUser(User user, string baseUrl)
+    {
+        return new UserResponse
+        {
+            Id = user.Id,
+            Name = user.Name,
+            Email = user.Email,
+            Links = new Dictionary<string, Link>
+            {
+                ["self"] = new Link($"{baseUrl}/api/users/{user.Id}"),
+                ["orders"] = new Link($"{baseUrl}/api/users/{user.Id}/orders"),
+                ["update"] = new Link($"{baseUrl}/api/users/{user.Id}", "PATCH"),
+                ["delete"] = new Link($"{baseUrl}/api/users/{user.Id}", "DELETE")
+            }
+        };
+    }
+}
+
+public record Link(string Href, string Method = "GET");
 ```
 
 ## GraphQL Design Patterns
