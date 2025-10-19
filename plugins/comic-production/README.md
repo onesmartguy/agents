@@ -6,7 +6,7 @@ Production-ready plugin for creating comic episodes (vertical video + print) usi
 
 ## Overview
 
-The Comic Production plugin provides a complete pipeline for AI-generated comic creation, from initial story concept to final distribution. Built specifically for the [Em & E Comics](https://github.com/yourusername/ai-comic-strip) project, but adaptable to any comic production workflow.
+The Comic Production plugin provides a complete pipeline for AI-generated comic creation, from initial story concept to final distribution. Built specifically for the [AI Comic Strip Studio](https://github.com/yourusername/ai-comic-strip) project (`mcp-comic-strip-studio`), but adaptable to any comic production workflow.
 
 ### What It Does
 
@@ -35,7 +35,7 @@ The Comic Production plugin provides a complete pipeline for AI-generated comic 
 - Claude Desktop with plugin support
 
 **Recommended:**
-- Em & E Comics MCP Server (for orchestration)
+- AI Comic Strip Studio MCP Server (`mcp-comic-strip-studio`) (for orchestration)
 - NVIDIA GPU or M1/M2/M3 Mac (for ComfyUI)
 - Firebase project (for asset distribution)
 
@@ -681,7 +681,7 @@ Options:
   --status    Check MCP server status
 ```
 
-**Sets up**: Em & E Comics MCP server with 28 tools for complete workflow automation
+**Sets up**: AI Comic Strip Studio MCP server (`mcp-comic-strip-studio`) with 28 tools for complete workflow automation
 
 **All 28 Tools**: Story development (5), Character tools (8), Environment tools (5), Image generation (3), Production tools (3), Assembly (2), Orchestration (1), Style (1)
 
@@ -1245,7 +1245,7 @@ cd episodes/pilot && npm run build
 **Fix**:
 ```bash
 # Rebuild MCP server
-cd ~/source/ai-comic-strip/apps/mcp-em-e-comics
+cd ~/source/ai-comic-strip/apps/mcp-comic-strip-studio
 pnpm install
 pnpm build
 
@@ -1487,7 +1487,7 @@ MIT License - see LICENSE file
 
 - **Documentation**: See individual skill files in `skills/` directory
 - **Issues**: Report at https://github.com/wshobson/agents/issues
-- **MCP Server**: https://github.com/yourusername/ai-comic-strip
+- **MCP Server**: https://github.com/yourusername/ai-comic-strip (`mcp-comic-strip-studio`)
 
 ---
 

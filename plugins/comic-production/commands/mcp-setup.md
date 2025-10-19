@@ -2,7 +2,7 @@
 description: Set up and configure MCP server with all 28 comic production tools. Activates episode-manager agent.
 ---
 
-Set up and configure the Em & E Comics MCP server with all 28 production tools.
+Set up and configure the AI Comic Strip Studio MCP server (`mcp-comic-strip-studio`) with all 28 production tools.
 
 ## Usage
 
@@ -98,7 +98,7 @@ Set up and configure the Em & E Comics MCP server with all 28 production tools.
 
 2. **Install Dependencies**:
    ```bash
-   cd ~/source/ai-comic-strip/apps/mcp-em-e-comics
+   cd ~/source/ai-comic-strip/apps/mcp-comic-strip-studio
    pnpm install
    pnpm build
    ```
@@ -108,10 +108,10 @@ Set up and configure the Em & E Comics MCP server with all 28 production tools.
    ```json
    {
      "mcpServers": {
-       "em-e-comics": {
+       "comic-strip-studio": {
          "command": "node",
          "args": [
-           "/Users/eddie.flores/source/ai-comic-strip/apps/mcp-em-e-comics/dist/index.js"
+           "/Users/eddie.flores/source/ai-comic-strip/apps/mcp-comic-strip-studio/dist/server.js"
          ]
        }
      }

@@ -5,7 +5,7 @@ description: MCP server tools for comic production orchestration, story developm
 
 # MCP Comic Orchestration
 
-Comprehensive guide to using the Em & E Comics MCP server (`mcp-em-e-comics`) for AI-powered comic production.
+Comprehensive guide to using the AI Comic Strip Studio MCP server (`mcp-comic-strip-studio`) for AI-powered comic production.
 
 ## Overview
 
@@ -811,8 +811,8 @@ async function batchGenerate(shots, batchSize = 3) {
 
 ## Resources
 
-- **MCP Server Source**: `/Users/eddie.flores/source/ai-comic-strip/apps/mcp-em-e-comics`
-- **Tool Definitions**: `apps/mcp-em-e-comics/src/tools/*/`
+- **MCP Server Source**: `/Users/eddie.flores/source/ai-comic-strip/apps/mcp-comic-strip-studio`
+- **Tool Definitions**: `apps/mcp-comic-strip-studio/src/tools/*/`
 - **Character References**: `characters/references/*.json`
 - **Environment References**: `environments/references/*.json`
 - **Episode Content**: `episodes/{episode-id}/`

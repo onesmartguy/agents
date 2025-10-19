@@ -5,7 +5,7 @@ description: MCP (Model Context Protocol) server development guide with TypeScri
 
 # MCP Server Development
 
-Step-by-step guide to building production-ready MCP servers using the `mcp-em-e-comics` server as a reference implementation.
+Step-by-step guide to building production-ready MCP servers using the `mcp-comic-strip-studio` server as a reference implementation.
 
 ## Quick Start
 
@@ -84,7 +84,7 @@ export default defineConfig({
 
 ### 3. Server Implementation
 
-**src/server.ts** (based on mcp-em-e-comics/src/server.ts):
+**src/server.ts** (based on mcp-comic-strip-studio/src/server.ts):
 
 ```typescript
 import 'dotenv/config'
@@ -212,7 +212,7 @@ Restart Claude Desktop to load the server.
 
 ### Basic Tool Structure
 
-From `mcp-em-e-comics/src/tools/story/create-beat-sheet.ts`:
+From `mcp-comic-strip-studio/src/tools/story/create-beat-sheet.ts`:
 
 ```typescript
 /**
@@ -325,7 +325,7 @@ export const createBeatSheetTool: Tool & { handler: typeof createBeatSheet } = {
 
 ### Tool with External API Integration
 
-From `mcp-em-e-comics/src/tools/image-generation/render-panel.ts`:
+From `mcp-comic-strip-studio/src/tools/image-generation/render-panel.ts`:
 
 ```typescript
 export async function renderPanel(
@@ -412,7 +412,7 @@ export async function renderPanel(
 
 ### Creating a Client
 
-From `mcp-em-e-comics/src/clients/comfyui.ts`:
+From `mcp-comic-strip-studio/src/clients/comfyui.ts`:
 
 ```typescript
 export interface ComfyUIClient {
@@ -480,7 +480,7 @@ export function createComfyUIClient(config: ComfyUIConfig): ComfyUIClient {
 
 ### Using Clients in Server
 
-From `mcp-em-e-comics/src/server.ts`:
+From `mcp-comic-strip-studio/src/server.ts`:
 
 ```typescript
 export interface Clients {
@@ -979,7 +979,7 @@ const styles = await getCachedData('style-presets', async () => {
 
 ## Resources
 
-- **Reference Implementation**: `/Users/eddie.flores/source/ai-comic-strip/apps/mcp-em-e-comics`
+- **Reference Implementation**: `/Users/eddie.flores/source/ai-comic-strip/apps/mcp-comic-strip-studio`
 - **MCP SDK Docs**: https://github.com/anthropics/model-context-protocol
 - **TypeScript Handbook**: https://www.typescriptlang.org/docs/
 - **Zod Documentation**: https://zod.dev/

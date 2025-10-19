@@ -9,7 +9,7 @@ Production-ready patterns for building Model Context Protocol servers with multi
 
 ## Overview
 
-Based on the `mcp-em-e-comics` server implementation at `/Users/eddie.flores/source/ai-comic-strip/apps/mcp-em-e-comics`, this skill documents proven patterns for MCP server architecture.
+Based on the `mcp-comic-strip-studio` server implementation at `/Users/eddie.flores/source/ai-comic-strip/apps/mcp-comic-strip-studio`, this skill documents proven patterns for MCP server architecture.
 
 ## Core Architecture Pattern
 
@@ -85,7 +85,7 @@ async function initializeClients(): Promise<Clients> {
 
 ### Category-Based Organization
 
-**tools/story/index.ts:12-25**
+From `mcp-comic-strip-studio/src/tools/story/index.ts`:
 
 ```typescript
 import { createBeatSheetTool } from './create-beat-sheet.js'
@@ -112,7 +112,7 @@ export const storyTools = [
 
 ### Tool Definition Pattern
 
-**tools/story/create-beat-sheet.ts:165-199**
+From `mcp-comic-strip-studio/src/tools/story/create-beat-sheet.ts`:
 
 ```typescript
 export const createBeatSheetTool: any = {
@@ -163,7 +163,7 @@ export const createBeatSheetTool: any = {
 
 ### Provider Factory Pattern
 
-**tools/image-providers/factory.ts pattern:**
+From `mcp-comic-strip-studio/src/tools/image-providers/factory.ts`:
 
 ```typescript
 export class ProviderFactory {
@@ -205,7 +205,9 @@ export interface ImageProvider {
 }
 ```
 
-### render-panel.ts:108-125 Integration
+### Integration with render_panel Tool
+
+From `mcp-comic-strip-studio/src/tools/image-generation/render-panel.ts`:
 
 ```typescript
 // Set provider preference if specified
@@ -240,7 +242,7 @@ const response = await imageProvider.generate(request)
 
 ### ComfyUI Client Example
 
-**clients/comfyui.ts pattern:**
+From `mcp-comic-strip-studio/src/clients/comfyui.ts`:
 
 ```typescript
 export interface ComfyUIClient {
@@ -297,7 +299,7 @@ export function createComfyUIClient(config: ComfyUIConfig): ComfyUIClient {
 
 ### Tool-Level Error Handling
 
-**tools/character-tools/create-character-from-photo.ts:79-88**
+From `mcp-comic-strip-studio/src/tools/character-tools/create-character-from-photo.ts`:
 
 ```typescript
 try {
@@ -329,7 +331,7 @@ try {
 
 ### Server-Level Error Handling
 
-**server.ts:160-182**
+From `mcp-comic-strip-studio/src/server.ts`:
 
 ```typescript
 try {
@@ -363,7 +365,7 @@ try {
 
 ## Config Management Pattern
 
-**utils/config.ts pattern:**
+From `mcp-comic-strip-studio/src/utils/config.ts`:
 
 ```typescript
 import 'dotenv/config'
@@ -411,7 +413,7 @@ export async function loadConfig() {
 
 ```typescript
 // Always log to stderr (MCP spec: stdout reserved for JSON-RPC)
-console.error('[Server] Em & E Comics MCP Server starting...')
+console.error('[Server] Comic Strip Studio MCP Server starting...')
 console.error(`[Server] ComfyUI: ${comfyuiHealthy ? '✓' : '✗'}`)
 console.error(`[Server] ListTools called - ${allTools.length} tools available`)
 console.error(`[Server] CallTool: ${toolName}`)
@@ -427,7 +429,7 @@ console.error(`[Server] Tool ${toolName} error:`, error)
 
 ## Type Safety Pattern
 
-**types/index.ts:**
+From `mcp-comic-strip-studio/src/types/index.ts`:
 
 ```typescript
 export interface Clients {
@@ -469,7 +471,7 @@ export interface ImageGenerationResponse {
 
 ## Tool Registration Pattern
 
-**server.ts:124-138**
+From `mcp-comic-strip-studio/src/server.ts`:
 
 ```typescript
 async function registerHandlers(clients: Clients) {
@@ -539,10 +541,10 @@ describe('createBeatSheet', () => {
 ```json
 {
   "mcpServers": {
-    "em-e-comics": {
+    "comic-strip-studio": {
       "command": "node",
       "args": [
-        "/Users/eddie.flores/source/ai-comic-strip/apps/mcp-em-e-comics/dist/server.js"
+        "/Users/eddie.flores/source/ai-comic-strip/apps/comic-strip-studio/dist/server.js"
       ]
     }
   }
@@ -579,12 +581,12 @@ WORKING_DIRECTORY=/Users/eddie.flores/source/ai-comic-strip
 
 ```json
 {
-  "name": "mcp-em-e-comics",
+  "name": "mcp-comic-strip-studio",
   "version": "0.1.0",
   "type": "module",
   "main": "dist/server.js",
   "bin": {
-    "mcp-em-e-comics": "./dist/server.js"
+    "mcp-comic-strip-studio": "./dist/server.js"
   },
   "scripts": {
     "dev": "tsup --watch",
@@ -666,7 +668,7 @@ export async function getStylePresets() {
 
 ## Reference Implementation
 
-**Full example**: `/Users/eddie.flores/source/ai-comic-strip/apps/mcp-em-e-comics`
+**Full example**: `/Users/eddie.flores/source/ai-comic-strip/apps/mcp-comic-strip-studio`
 
 **Key files to study:**
 - `src/server.ts` - Server initialization and registration
