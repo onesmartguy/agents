@@ -6,8 +6,8 @@
     "url": "https://github.com/onesmartguy"
   },
   "metadata": {
-    "description": "Production-ready workflow orchestration with 64 focused plugins, 87 specialized agents, and 44 tools - optimized for granular installation and minimal token usage",
-    "version": "1.2.0"
+    "description": "Production-ready workflow orchestration with 76 focused plugins, 167 specialized agents, 87 commands, and 89 skills - optimized for granular installation and minimal token usage",
+    "version": "1.3.0"
   },
   "plugins": [
     {
@@ -2019,26 +2019,9 @@
       ],
       "category": "languages",
       "strict": false,
-      "commands": [
-        "./commands/dotnet-scaffold.md"
-      ],
-      "agents": [
-        "./agents/dotnet-pro.md",
-        "./agents/aspnet-core-pro.md",
-        "./agents/ef-core-pro.md"
-      ],
-      "skills": [
-        "./skills/cqrs-patterns",
-        "./skills/domain-driven-design",
-        "./skills/async-csharp-patterns",
-        "./skills/entity-framework-core-optimization",
-        "./skills/dotnet-testing-strategies",
-        "./skills/clean-architecture-dotnet",
-        "./skills/aspnet-mvc-5-patterns",
-        "./skills/entity-framework-6-optimization",
-        "./skills/legacy-dotnet-modernization",
-        "./skills/windows-authentication-patterns"
-      ]
+      "commands": [],
+      "agents": [],
+      "skills": []
     },
     {
       "name": "react-development",
@@ -2062,21 +2045,12 @@
       ],
       "category": "languages",
       "strict": false,
-      "commands": [
-        "./commands/react-scaffold.md"
-      ],
+      "commands": [],
       "agents": [
-        "./agents/react-pro.md",
-        "./agents/react-query-pro.md",
-        "./agents/react-testing-pro.md"
+        "./agents/react-pro.md"
       ],
       "skills": [
-        "./skills/firebase-integration",
-        "./skills/react-hooks-mastery",
-        "./skills/react-performance-optimization",
-        "./skills/react-state-management",
-        "./skills/react-component-patterns",
-        "./skills/react-testing-patterns"
+        "./skills/firebase-integration"
       ]
     },
     {
@@ -2102,21 +2076,10 @@
       ],
       "category": "languages",
       "strict": false,
-      "commands": [
-        "./commands/nextjs-scaffold.md"
-      ],
-      "agents": [
-        "./agents/nextjs-pro.md",
-        "./agents/nextjs-api-pro.md",
-        "./agents/nextjs-deployment-pro.md"
-      ],
+      "commands": [],
+      "agents": [],
       "skills": [
-        "./skills/app-router-patterns",
-        "./skills/firebase-nextjs-integration",
-        "./skills/nextjs-api-routes",
-        "./skills/nextjs-data-fetching",
-        "./skills/nextjs-optimization",
-        "./skills/server-components"
+        "./skills/firebase-nextjs-integration"
       ]
     },
     {
@@ -2141,21 +2104,10 @@
       ],
       "category": "languages",
       "strict": false,
-      "commands": [
-        "./commands/react-native-scaffold.md"
-      ],
-      "agents": [
-        "./agents/react-native-pro.md",
-        "./agents/react-native-ui-pro.md",
-        "./agents/react-native-native-modules-pro.md"
-      ],
+      "commands": [],
+      "agents": [],
       "skills": [
-        "./skills/firebase-react-native-integration",
-        "./skills/react-native-animations",
-        "./skills/react-native-navigation",
-        "./skills/react-native-performance",
-        "./skills/react-native-platform-specific",
-        "./skills/react-native-state-management"
+        "./skills/firebase-react-native-integration"
       ]
     },
     {
@@ -2179,21 +2131,9 @@
       ],
       "category": "languages",
       "strict": false,
-      "commands": [
-        "./commands/expo-scaffold.md"
-      ],
-      "agents": [
-        "./agents/expo-pro.md",
-        "./agents/expo-router-pro.md",
-        "./agents/eas-build-pro.md"
-      ],
-      "skills": [
-        "./skills/expo-managed-workflow",
-        "./skills/expo-router-v3",
-        "./skills/eas-build-configuration",
-        "./skills/expo-modules",
-        "./skills/expo-ota-updates"
-      ]
+      "commands": [],
+      "agents": [],
+      "skills": []
     },
     {
       "name": "tailwind-styling",
@@ -2216,19 +2156,9 @@
       ],
       "category": "development",
       "strict": false,
-      "commands": [
-        "./commands/tailwind-setup.md"
-      ],
-      "agents": [
-        "./agents/tailwind-pro.md",
-        "./agents/design-system-pro.md"
-      ],
-      "skills": [
-        "./skills/tailwind-configuration",
-        "./skills/cva-variant-patterns",
-        "./skills/design-tokens",
-        "./skills/responsive-design-patterns"
-      ]
+      "commands": [],
+      "agents": [],
+      "skills": []
     },
     {
       "name": "playwright-development",
@@ -2251,19 +2181,9 @@
       ],
       "category": "testing",
       "strict": false,
-      "commands": [
-        "./commands/playwright-scaffold.md"
-      ],
-      "agents": [
-        "./agents/playwright-pro.md",
-        "./agents/playwright-ci-pro.md"
-      ],
-      "skills": [
-        "./skills/playwright-patterns",
-        "./skills/page-object-model",
-        "./skills/playwright-ci-integration",
-        "./skills/visual-regression-testing"
-      ]
+      "commands": [],
+      "agents": [],
+      "skills": []
     },
     {
       "name": "react-animations",
@@ -2376,6 +2296,50 @@
         "./skills/text-to-speech-optimization",
         "./skills/audio-editing-automation",
         "./skills/sound-effect-sourcing"
+      ]
+    },
+    {
+      "name": "generative-ai",
+      "source": "./plugins/generative-ai",
+      "description": "AI image generation prompt engineering for Midjourney, ComfyUI, Gemini Imagen, and Adobe Firefly with cross-platform conversion",
+      "version": "1.2.0",
+      "author": {
+        "name": "Eddie Flores",
+        "url": "https://github.com/onesmartguy"
+      },
+      "homepage": "https://github.com/onesmartguy/agents",
+      "repository": "https://github.com/onesmartguy/agents",
+      "license": "MIT",
+      "keywords": [
+        "ai-image-generation",
+        "prompt-engineering",
+        "midjourney",
+        "comfyui",
+        "gemini",
+        "firefly",
+        "stable-diffusion",
+        "flux",
+        "prompt-conversion"
+      ],
+      "category": "ai-ml",
+      "strict": false,
+      "commands": [
+        "./commands/prompt-midjourney.md",
+        "./commands/prompt-comfyui.md",
+        "./commands/prompt-gemini.md",
+        "./commands/prompt-firefly.md",
+        "./commands/convert-prompt.md"
+      ],
+      "agents": [
+        "./agents/midjourney-expert.md",
+        "./agents/comfyui-expert.md",
+        "./agents/gemini-expert.md",
+        "./agents/firefly-expert.md",
+        "./agents/prompt-converter.md"
+      ],
+      "skills": [
+        "./skills/prompt-conversion",
+        "./skills/style-library"
       ]
     },
     {

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Purpose
 
-This is a Claude Code plugin marketplace repository containing 63+ focused, single-purpose plugins that provide 85+ specialized AI agents, 47 agent skills, and 44 development tools for intelligent automation and multi-agent orchestration.
+This is a Claude Code plugin marketplace repository containing 76 focused, single-purpose plugins that provide 167 specialized AI agents, 89 agent skills, and 87 development tools for intelligent automation and multi-agent orchestration.
 
 ## Architecture
 
@@ -123,20 +123,21 @@ When modifying `.claude-plugin/marketplace.json`:
 - No bloated multi-purpose plugins
 
 ### Hybrid Model Orchestration
-- Haiku agents (47): Fast execution, deterministic tasks (generation, tests, docs, deployments)
-- Sonnet agents (97): Complex reasoning, architecture (design, reviews, security, AI/ML)
+- Haiku agents (52): Fast execution, deterministic tasks (generation, tests, docs, deployments)
+- Sonnet agents (110): Complex reasoning, architecture (design, reviews, security, AI/ML)
+- Unspecified (5): Agents without explicit model assignments
 
 ### Granular Plugin Categories
-- 23 categories (Development, Security, Operations, Languages, Infrastructure, etc.)
-- 1-6 plugins per category for easy discovery
-- 100% agent coverage - all plugins include at least one agent
+- 25 categories (Development, Security, Operations, Languages, Infrastructure, AI-ML, etc.)
+- 1-8 plugins per category for easy discovery
+- Most plugins include agents, commands, or skills for complete workflows
 
 ## Key Files
 
-- `.claude-plugin/marketplace.json` - Central plugin registry (all 63+ plugin definitions)
+- `.claude-plugin/marketplace.json` - Central plugin registry (all 76 plugin definitions)
 - `docs/plugins.md` - Complete plugin catalog and reference
-- `docs/agents.md` - All 85+ agents organized by category with model assignments
-- `docs/agent-skills.md` - 47 skills documentation and usage guide
+- `docs/agents.md` - All 167 agents organized by category with model assignments
+- `docs/agent-skills.md` - 89 skills documentation and usage guide
 - `docs/usage.md` - Command reference and workflow examples
 - `docs/architecture.md` - Design principles and patterns
 - `README.md` - Quick start and overview
@@ -164,4 +165,4 @@ Creates production-ready FastAPI project, activating async-python-patterns, pyth
 - All file paths in marketplace.json are relative to plugin source directory (e.g., `./agents/agent-name.md`)
 - Agent names should use hyphen-case, be descriptive, and match filename
 - Keep plugins focused - create new plugins rather than expanding existing ones
-- Skills count: 47 across 14 plugins (Python: 5, JS/TS: 4, K8s: 4, Cloud: 4, CI/CD: 4, Backend: 3, LLM: 4, Blockchain: 4, etc.)
+- Skills count: 89 across 28 plugins (Comic Production: 10, Backend: 5, LLM: 5, CI/CD: 5, Python: 5, Payment Processing: 5, K8s: 4, Cloud: 4, Blockchain: 4, JS/TS: 4, etc.)
